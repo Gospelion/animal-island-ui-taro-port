@@ -80,15 +80,20 @@ npm run demo:taro:weapp
 
 ## GitHub Pages Demo
 
-本仓库效仿上游 demo 发布方式，只发布 Taro H5 demo 到 GitHub Pages：
+本仓库只发布 Taro H5 demo 到 GitHub Pages。推荐使用已内置的 GitHub Actions 自动发布流程：
+
+1. 推送代码到 `main`。
+2. 在 GitHub 仓库 `Settings` → `Pages` 中，将 `Build and deployment` 的 `Source` 设置为 `GitHub Actions`。
+3. 之后每次 `main` 更新都会自动执行 `.github/workflows/pages.yml`，构建并发布 `examples/taro-demo/dist`。
+
+本地仍可手动验证构建：
 
 ```bash
 npm run build:demo
-npm run deploy
 ```
 
 - `build:demo` 会先构建 `packages/core` 和 `packages/taro-ui`，再构建 `examples/taro-demo` 的 H5 产物，并生成 `examples/taro-demo/dist/index.html`。
-- `deploy` 会执行 `build:demo`，然后使用 `gh-pages -d examples/taro-demo/dist` 发布。
+- `deploy` 会执行 `build:demo`，然后使用 `gh-pages -d examples/taro-demo/dist` 手动发布到 `gh-pages` 分支；这是备选方案，不是自动发布必需步骤。
 - 默认 GitHub Pages base path 是 `/animal-island-ui-taro-port/`。如果仓库名不同，可以在构建时设置 `TARO_PUBLIC_PATH`，例如 `TARO_PUBLIC_PATH=/your-repo/ npm run build:demo`。
 - `examples/weapp-demo` 是微信原生小程序项目，不发布到 github.io；它仍通过微信开发者工具验证。
 

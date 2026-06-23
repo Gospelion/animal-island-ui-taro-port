@@ -35,6 +35,7 @@ Spike v0 已验证 5 个代表组件：
 - `Radio`
 - `Title`
 - `Divider`
+- `Collapse`
 
 以下组件暂不进入当前批次：
 
@@ -59,6 +60,8 @@ Spike v0 中有几个刻意保留的平台差异：
 - Taro `Checkbox` / `Radio` 采用上游组选项语义：`options`、`value` / `defaultValue`、`onChange`。
 - 微信原生 `ai-checkbox` / `ai-radio` 使用 `options` 与 `value` 属性，变化值位于 `event.detail.value`。
 - 微信原生 `ai-switch` 使用 `checked` 属性与 `bind:change`，变化值位于 `event.detail.checked`。
+- Taro `Collapse` 使用 `question` 和 `children`，支持 `expanded` / `defaultExpanded`，`onChange` 接收下一个展开值。
+- 微信原生 `ai-collapse` 使用 `question` 属性与默认 slot，变化值位于 `event.detail.expanded`。
 
 ## 目录结构
 

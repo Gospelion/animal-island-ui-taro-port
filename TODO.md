@@ -20,14 +20,14 @@
 
 ## 当前状态
 
-当前已经完成 Spike v0 和下一批低风险组件迁移，双线合计 10 个组件可用。
+当前已经完成 Spike v0、下一批低风险组件迁移和 `Collapse` 首版迁移，双线合计 11 个组件可用。
 
 - Taro 组件包已可类型检查和构建。
 - Taro demo 已同步展示全部已迁移组件。
 - Taro demo 已可构建 H5 和微信小程序产物。
 - 微信原生组件包结构完整，已可生成发布形态。
 - 微信原生 demo 已同步展示全部已迁移组件，并可生成 `node_modules` / `miniprogram_npm` 接入目录。
-- `scripts/check-weapp-structure.mjs` 已覆盖当前 10 个原生组件。
+- `scripts/check-weapp-structure.mjs` 已覆盖当前 11 个原生组件。
 
 ## 已完成组件
 
@@ -46,6 +46,7 @@
 - [x] `Radio` / `ai-radio`
 - [x] `Title` / `ai-title`
 - [x] `Divider` / `ai-divider`
+- [x] `Collapse` / `ai-collapse`
 
 ## 已完成工程项
 
@@ -123,9 +124,64 @@
 
 下一批建议优先从小程序适配风险较低、视觉独立性较强的组件中选择。
 
-- [ ] `Collapse`
+- [x] `Collapse`
   - 相对独立，适合继续验证状态型组件迁移。
   - 需要确认展开动效在 Taro / Weapp 中的高度动画策略。
+  - 执行状态：首版双线实现已完成，已接入 Taro demo 和微信原生 demo；仍需人工预览确认高度动画和视觉细节。
+  - 上游行为：FAQ 卡片形态；`question` 渲染标题，`answer` 渲染内容，`defaultExpanded` 控制初始展开，`disabled` 禁止切换；点击标题区在展开 / 收起之间切换；展开态圆形图标从 `+` 切换为 `-`，右侧叶子装饰旋转并增强透明度。
+  - Taro API 建议：
+    - `question?: React.ReactNode`
+    - `defaultExpanded?: boolean`
+    - `expanded?: boolean`
+    - `disabled?: boolean`
+    - `className?: string`
+    - `style?: React.CSSProperties`
+    - `onChange?: (expanded: boolean) => void`
+    - `children?: React.ReactNode` 作为答案内容，避免继续使用 Web 语义里的 `answer` prop。
+  - 微信原生 API 建议：
+    - `question: String`
+    - `expanded: Boolean`
+    - `default-expanded: Boolean`
+    - `disabled: Boolean`
+    - `custom-class: String`
+    - `custom-style: String`
+    - 默认 slot 作为答案内容。
+    - 可选 `slot="question"`，用于后续承载复杂标题；首版可先只支持字符串 `question`，避免 WXML slot 探测复杂化。
+    - `bind:change` 返回 `event.detail.expanded`。
+  - 受控 / 非受控策略：
+    - Taro 同时支持 `expanded` 受控和 `defaultExpanded` 非受控，保持与 `Switch` / `Checkbox` 的当前模式一致。
+    - 原生小程序优先采用外部受控 `expanded`；若未绑定 `expanded`，内部使用 `defaultExpanded` 初始化并自行切换。需要在实现前确认组件属性 observer 是否会把外部 `expanded` 更新同步进内部态。
+  - 高度动画策略：
+    - Taro H5 可复用上游 `grid-template-rows: 0fr -> 1fr`；Taro weapp 需验证小程序端对 CSS grid 动画的支持。
+    - 原生 Weapp 首版建议使用 `max-height` + `opacity` + `padding` 过渡，并设置保守上限，例如 `max-height: 800rpx`；如果内容超出上限，再升级为测量高度方案。
+    - 不在首版引入 JS 测量动画，除非预览发现 `max-height` 在真实内容中明显失败。
+  - 样式迁移要点：
+    - 复用现有 `--ai-*` token：`--ai-paper`、`--ai-border`、`--ai-primary`、`--ai-primary-dark`、`--ai-text`、`--ai-muted`、`--ai-shadow`。
+    - 叶子装饰优先用 CSS 文本 / 简化图形或现有 `Icon` 的 `icon-leaf` 视觉语义，不迁移上游内联 SVG 到原生 WXML。
+    - `custom-class` / `custom-style` 仅作用在根节点，内部类名仍不作为稳定 API。
+  - Demo 接入：
+    - Taro demo 将 `collapse` 从待迁移菜单移动到基础组件菜单，新增 `CollapseDemo`，覆盖默认收起、默认展开、禁用、受控切换。
+    - 微信原生 demo 在首页新增 `ai-collapse` 示例，展示默认 slot、禁用态和 `bind:change` 更新页面文本。
+    - `examples/weapp-demo/pages/index/index.json` 增加 `ai-collapse` usingComponents。
+  - 工程改动清单：
+    - 新增 `packages/taro-ui/src/components/Collapse.tsx`，并在 `packages/taro-ui/src/index.ts` 导出。
+    - 在 `packages/taro-ui/src/components/styles.css` 添加 `.ai-collapse*` 样式。
+    - 新增 `packages/weapp-native/components/ai-collapse/index.{js,json,wxml,wxss}`。
+    - 更新 `scripts/check-weapp-structure.mjs` 的组件清单。
+    - 更新 `packages/weapp-native/README.md` 记录 `ai-collapse` 事件 payload。
+    - 更新 `README.md` 已迁移组件范围和 API 差异说明。
+  - 验收清单：
+    - `npm run typecheck`
+    - `npm run build:all`
+    - `npm run test`
+    - `npm run build:h5 -w examples-taro-demo`
+    - `npm run build:weapp -w examples-taro-demo`
+    - `npm run prepare:weapp-demo`
+    - 人工预览 Taro H5 / Taro weapp / 微信原生 demo 中展开、收起、禁用、受控状态和动效。
+  - 主要风险：
+    - 小程序端高度动画能力不如 Web，首版 `max-height` 方案可能无法适配超长答案。
+    - 原生 slot 标题与字符串标题的兼容策略需要避免过度设计。
+    - 上游文件中的中文注释存在编码异常，迁移时以实际 TypeScript props 和测试行为为准。
 - [ ] `Tabs`
   - 常用基础组件，适合补齐 demo 的导航型交互。
   - 需要确认横向滚动、激活指示器和受控 API。

@@ -1,0 +1,18 @@
+<view
+  class="ai-collapse {{innerExpanded ? 'ai-collapse-expanded' : ''}} {{disabled ? 'ai-collapse-disabled' : ''}} {{customClass}}"
+  style="{{customStyle}}"
+>
+  <view class="ai-collapse-header" bindtap="handleTap">
+    <text class="ai-collapse-icon">{{innerExpanded ? '-' : '+'}}</text>
+    <view class="ai-collapse-question">
+      <slot name="question"></slot>
+      <text wx:if="{{question}}">{{question}}</text>
+    </view>
+    <view class="ai-collapse-leaf"></view>
+  </view>
+  <view class="ai-collapse-panel">
+    <view class="ai-collapse-content">
+      <slot></slot>
+    </view>
+  </view>
+</view>

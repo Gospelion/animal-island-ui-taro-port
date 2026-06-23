@@ -4,6 +4,7 @@ import {
   Button,
   Card,
   Checkbox,
+  Collapse,
   Divider,
   Icon,
   Input,
@@ -15,7 +16,7 @@ import {
 } from '@animal-island-ui/taro';
 import './index.css';
 
-type PageKey = 'home' | 'title' | 'button' | 'input' | 'switch' | 'card' | 'modal' | 'divider' | 'icon' | 'checkbox' | 'radio';
+type PageKey = 'home' | 'title' | 'button' | 'input' | 'switch' | 'card' | 'modal' | 'divider' | 'icon' | 'checkbox' | 'radio' | 'collapse';
 
 const pageInfo: Record<PageKey, { title: string; desc: string; badge: string }> = {
   home: { title: 'Animal Island UI', desc: 'Animal 风格的 Taro 组件展示页，复刻原仓库 demo 的首页、侧边导航和组件文档逻辑。', badge: 'Taro' },
@@ -28,7 +29,8 @@ const pageInfo: Record<PageKey, { title: string; desc: string; badge: string }> 
   divider: { title: 'Divider 分割线', desc: '装饰性分割线，支持实线、虚线和波浪线。', badge: '9 types' },
   icon: { title: 'Icon 图标', desc: '岛屿主题图标，支持尺寸和弹跳动效。', badge: 'icons' },
   checkbox: { title: 'Checkbox 多选框', desc: '支持受控 / 非受控、方向、尺寸和禁用选项。', badge: 'controlled' },
-  radio: { title: 'Radio 单选框', desc: '支持受控 / 非受控、方向、尺寸和禁用选项。', badge: 'controlled' }
+  radio: { title: 'Radio 单选框', desc: '支持受控 / 非受控、方向、尺寸和禁用选项。', badge: 'controlled' },
+  collapse: { title: 'Collapse 折叠面板', desc: 'FAQ 风格的状态型折叠面板，支持受控、默认展开和禁用状态。', badge: 'stateful' }
 };
 
 const menu = [
@@ -44,13 +46,13 @@ const menu = [
       ['divider', 'Divider 分割线'],
       ['icon', 'Icon 图标'],
       ['checkbox', 'Checkbox 多选框'],
-      ['radio', 'Radio 单选框']
+      ['radio', 'Radio 单选框'],
+      ['collapse', 'Collapse 折叠面板', true]
     ]
   },
   {
     title: '-- 待移植组件 --',
     children: [
-      ['collapse', 'Collapse 折叠面板', false, true],
       ['typewriter', 'Typewriter 打字机', false, true],
       ['select', 'Select 选择器', false, true],
       ['tabs', 'Tabs 标签页', false, true],
@@ -279,8 +281,39 @@ function RadioDemo() {
   return <><Section title="受控单选" badge={String(season)}><Radio options={options} value={season} onChange={setSeason} /></Section><Section title="垂直排列"><Radio options={options} defaultValue="summer" direction="vertical" size="large" /></Section><Code>{'<Radio options={options} value={season} onChange={setSeason} />'}</Code><Api rows={[['options', '选项列表', 'RadioOption[]'], ['value', '受控值', 'string | number'], ['direction', '排列方向', 'horizontal | vertical']]} /></>;
 }
 
+function CollapseDemo() {
+  const [expanded, setExpanded] = useState(true);
+  return (
+    <>
+      <Section title="基础用法" badge="uncontrolled">
+        <View className="demo-col">
+          <Collapse question="什么时候适合使用 Collapse?">
+            <Text>适合展示 FAQ、设置说明和可以逐步展开的短内容。</Text>
+          </Collapse>
+          <Collapse question="默认展开" defaultExpanded>
+            <Text>通过 defaultExpanded 设置初始展开状态，之后由组件内部维护。</Text>
+          </Collapse>
+          <Collapse question="禁用状态" disabled>
+            <Text>禁用后点击标题区不会触发展开或收起。</Text>
+          </Collapse>
+        </View>
+      </Section>
+      <Section title="受控状态" badge={expanded ? 'open' : 'closed'}>
+        <View className="demo-col">
+          <Collapse question="今日岛屿清单" expanded={expanded} onChange={setExpanded}>
+            <Text>浇花、整理背包、给好友寄一张明信片。</Text>
+          </Collapse>
+          <Button type="dashed" onClick={() => setExpanded((value) => !value)}>Toggle controlled panel</Button>
+        </View>
+      </Section>
+      <Code>{"<Collapse question=\"今日岛屿清单\" expanded={expanded} onChange={setExpanded}>内容</Collapse>"}</Code>
+      <Api rows={[['question', '标题内容', 'ReactNode'], ['expanded', '受控展开值', 'boolean'], ['defaultExpanded', '默认展开值', 'boolean'], ['onChange', '展开变化回调', '(expanded) => void']]} />
+    </>
+  );
+}
+
 function ComponentPage({ active }: { active: PageKey }) {
-  const Demo = useMemo(() => ({ title: TitleDemo, button: ButtonDemo, input: InputDemo, switch: SwitchDemo, card: CardDemo, modal: ModalDemo, divider: DividerDemo, icon: IconDemo, checkbox: CheckboxDemo, radio: RadioDemo, home: () => null })[active], [active]);
+  const Demo = useMemo(() => ({ title: TitleDemo, button: ButtonDemo, input: InputDemo, switch: SwitchDemo, card: CardDemo, modal: ModalDemo, divider: DividerDemo, icon: IconDemo, checkbox: CheckboxDemo, radio: RadioDemo, collapse: CollapseDemo, home: () => null })[active], [active]);
   return (
     <ScrollView scrollY className="component-scroll">
       <View className="component-doc">

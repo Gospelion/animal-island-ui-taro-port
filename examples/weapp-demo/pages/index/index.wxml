@@ -35,6 +35,19 @@
     <text class="hint">Quiet hours: {{quietHours ? 'enabled' : 'disabled'}}</text>
   </ai-card>
 
+  <ai-card color="app-blue" custom-class="section">
+    <text class="section-title">Collapse</text>
+    <view class="collapse-stack">
+      <ai-collapse question="Island checklist" expanded="{{collapseOpen}}" bind:change="handleCollapseChange">
+        <text>Water flowers, check mail, and visit the museum before sunset.</text>
+      </ai-collapse>
+      <ai-collapse question="Disabled panel" disabled>
+        <text>This content stays collapsed because the panel is disabled.</text>
+      </ai-collapse>
+    </view>
+    <text class="hint">Collapse: {{collapseStatus}}</text>
+  </ai-card>
+
   <ai-card color="warm-peach-pink" custom-class="section">
     <text class="section-title">Checkbox</text>
     <ai-checkbox options="{{taskOptions}}" value="{{tasks}}" bind:change="handleTasksChange"></ai-checkbox>

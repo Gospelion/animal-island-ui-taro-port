@@ -3,6 +3,8 @@ Page({
     modalOpen: false,
     name: 'Nook',
     quietHours: true,
+    collapseOpen: true,
+    collapseStatus: 'open',
     tasks: ['fruit'],
     tasksText: 'fruit',
     season: 'spring',
@@ -31,6 +33,10 @@ Page({
   },
   handleQuietHoursChange(event) {
     this.setData({ quietHours: event.detail.checked });
+  },
+  handleCollapseChange(event) {
+    const collapseOpen = event.detail.expanded;
+    this.setData({ collapseOpen, collapseStatus: collapseOpen ? 'open' : 'closed' });
   },
   handleTasksChange(event) {
     const tasks = event.detail.value;

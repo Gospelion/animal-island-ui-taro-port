@@ -1,0 +1,116 @@
+@import "../../styles/common.wxss";
+
+.ai-collapse {
+  position: relative;
+  overflow: hidden;
+  color: var(--ai-text);
+  background: var(--ai-paper);
+  border: 4rpx solid var(--ai-border);
+  border-radius: 28rpx;
+  box-shadow: 0 8rpx 18rpx var(--ai-shadow);
+  transition: border-color .22s ease, box-shadow .22s ease, opacity .22s ease;
+}
+
+.ai-collapse-expanded {
+  border-color: rgba(22, 184, 170, .52);
+  box-shadow: 0 10rpx 22rpx rgba(95, 73, 39, .16);
+}
+
+.ai-collapse-disabled {
+  opacity: .58;
+}
+
+.ai-collapse-header {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 104rpx;
+  padding: 24rpx 32rpx;
+}
+
+.ai-collapse-icon {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 50rpx;
+  height: 50rpx;
+  color: #fff;
+  background: var(--ai-primary);
+  border-radius: 50%;
+  box-shadow: 0 4rpx 8rpx rgba(25, 200, 185, .3);
+  font-size: 34rpx;
+  font-weight: 900;
+  line-height: 1;
+  transition: background-color .22s ease, transform .22s ease;
+}
+
+.ai-collapse-expanded .ai-collapse-icon {
+  background: var(--ai-primary-dark);
+  transform: rotate(180deg);
+}
+
+.ai-collapse-question {
+  flex: 1;
+  min-width: 0;
+  color: var(--ai-text);
+  font-size: 30rpx;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.ai-collapse-leaf {
+  position: relative;
+  flex: 0 0 auto;
+  width: 36rpx;
+  height: 24rpx;
+  opacity: .52;
+  border-radius: 100% 0 100% 0;
+  background: var(--ai-primary);
+  transform: rotate(-18deg);
+  transition: opacity .22s ease, transform .22s ease;
+}
+
+.ai-collapse-leaf::after {
+  position: absolute;
+  top: 50%;
+  left: 6rpx;
+  width: 24rpx;
+  height: 3rpx;
+  content: "";
+  background: rgba(255, 255, 255, .68);
+  border-radius: 999rpx;
+  transform: rotate(-28deg);
+}
+
+.ai-collapse-expanded .ai-collapse-leaf {
+  opacity: 1;
+  transform: rotate(28deg);
+}
+
+.ai-collapse-panel {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height .28s ease, opacity .22s ease;
+}
+
+.ai-collapse-expanded .ai-collapse-panel {
+  max-height: 800rpx;
+  opacity: 1;
+}
+
+.ai-collapse-content {
+  box-sizing: border-box;
+  padding: 0 32rpx 0 102rpx;
+  color: var(--ai-muted);
+  font-size: 27rpx;
+  line-height: 1.7;
+  transition: padding-bottom .22s ease;
+}
+
+.ai-collapse-expanded .ai-collapse-content {
+  padding-bottom: 32rpx;
+}

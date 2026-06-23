@@ -38,6 +38,22 @@ Footer behavior:
 
 WXML slots do not provide a reliable React-like `footer === undefined` fallback check, so Spike v0 keeps `show-footer` as the explicit escape hatch.
 
+### `ai-collapse`
+
+`ai-collapse` uses the `question` property for the header and the default slot for panel content.
+
+`bind:change` emits:
+
+```js
+Page({
+  handleCollapseChange(event) {
+    const expanded = event.detail.expanded;
+  }
+});
+```
+
+When `expanded` is omitted, the component initializes from `default-expanded` and manages its own open state. When `expanded` is provided, the page should update it from `event.detail.expanded`.
+
 ### Style override boundary
 
 `custom-class` and `custom-style` are intended for safe outer layout overrides, such as margins, width, display placement, or one-off panel styling. Internal class names and child layout are not treated as stable public API in Spike v0.

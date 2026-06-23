@@ -13,7 +13,8 @@ const components = [
   'ai-checkbox',
   'ai-radio',
   'ai-title',
-  'ai-divider'
+  'ai-divider',
+  'ai-collapse'
 ];
 const required = ['index.wxml', 'index.wxss', 'index.js', 'index.json'];
 

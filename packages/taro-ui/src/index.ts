@@ -27,3 +27,6 @@ export type { TitleColor, TitleProps, TitleSize } from './components/Title';
 
 export { Divider } from './components/Divider';
 export type { DividerProps, DividerType } from './components/Divider';
+
+export { Collapse } from './components/Collapse';
+export type { CollapseProps } from './components/Collapse';

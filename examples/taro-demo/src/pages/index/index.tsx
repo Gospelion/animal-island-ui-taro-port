@@ -24,9 +24,9 @@ export default function Index() {
       <Card color="app-blue" className="section">
         <Text className="section-title">Icon</Text>
         <View className="row">
-          <Icon name="icon-miles" size="64rpx" bounce />
-          <Icon name="icon-camera" size="64rpx" />
-          <Icon name="icon-shopping" size="64rpx" />
+          <Icon name="icon-miles" size="64px" bounce />
+          <Icon name="icon-camera" size="64px" bounce />
+          <Icon name="icon-shopping" size="64px" bounce />
         </View>
       </Card>
 
@@ -38,7 +38,7 @@ export default function Index() {
           shadow
           placeholder="Your island name"
           onChange={({ value }) => setName(value)}
-          prefix={<Icon name="icon-map" size="36rpx" />}
+          prefix={<Icon name="icon-map" size="20px" />}
         />
         <Text className="hint">Current value: {name || '-'}</Text>
       </Card>

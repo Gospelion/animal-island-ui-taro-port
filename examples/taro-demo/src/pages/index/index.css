@@ -2,6 +2,7 @@
   box-sizing: border-box;
   min-height: 100vh;
   padding: 36rpx;
+  --demo-card-width: 800rpx;
 }
 
 .title {
@@ -21,6 +22,9 @@
 }
 
 .section {
+  box-sizing: border-box;
+  width: var(--demo-card-width);
+  max-width: 100%;
   margin-bottom: 28rpx;
 }
 

@@ -56,7 +56,7 @@ export const Button: React.FC<ButtonProps> = ({
       formType={htmlType === 'submit' ? 'submit' : htmlType === 'reset' ? 'reset' : undefined}
       className={cls}
       style={style}
-      disabled={disabled}
+      {...(disabled ? { disabled: true } : {})}
       loading={false}
       onClick={(event) => {
         if (!inactive) onClick?.(event);

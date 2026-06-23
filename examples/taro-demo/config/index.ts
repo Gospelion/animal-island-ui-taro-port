@@ -19,6 +19,7 @@ export default defineConfig({
   mini: {},
   h5: {
     publicPath: process.env.TARO_PUBLIC_PATH || (isProduction ? githubPagesBase : '/'),
-    staticDirectory: 'static'
+    staticDirectory: 'static',
+    prebundle: { enable: false }
   }
 });

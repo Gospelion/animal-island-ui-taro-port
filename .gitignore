@@ -6,6 +6,6 @@ dist/
 coverage/
 miniprogram_npm/
 *.tsbuildinfo
-
+/*.png
 # Read-only upstream reference repo.
 original-repo/

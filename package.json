@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@babel/preset-react": "^7.24.0",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.6.2",
     "@tarojs/cli": "^4.0.0",
     "@tarojs/components": "^4.0.0",
     "@tarojs/helper": "^4.0.0",
@@ -41,5 +42,8 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "typescript": "^5.7.0"
+  },
+  "overrides": {
+    "enhanced-resolve": "5.16.0"
   }
 }

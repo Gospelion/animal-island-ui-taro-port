@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.taro/
+.temp/
+.cache/
+coverage/
+miniprogram_npm/
+*.tsbuildinfo
+
+# Read-only upstream reference repo.
+original-repo/

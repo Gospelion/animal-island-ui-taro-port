@@ -1,0 +1,34 @@
+<view class="page">
+  <text class="title">Animal-Island-UI Spike v0</text>
+  <text class="subtitle">Native line: slot, bind events, custom-class/custom-style.</text>
+
+  <ai-card color="app-yellow" pattern="default" custom-class="section">
+    <text class="section-title">Button</text>
+    <view class="row">
+      <ai-button type="primary" bind:tap="openModal">Open Modal</ai-button>
+      <ai-button type="dashed">Dashed</ai-button>
+      <ai-button type="primary" loading>Loading</ai-button>
+    </view>
+  </ai-card>
+
+  <ai-card color="app-blue" custom-class="section">
+    <text class="section-title">Icon</text>
+    <view class="row">
+      <ai-icon name="icon-miles" size="64rpx" bounce></ai-icon>
+      <ai-icon name="icon-camera" size="64rpx"></ai-icon>
+      <ai-icon name="icon-shopping" size="64rpx"></ai-icon>
+    </view>
+  </ai-card>
+
+  <ai-card type="dashed" custom-class="section">
+    <text class="section-title">Input</text>
+    <ai-input value="{{name}}" allow-clear shadow placeholder="Your island name" bind:change="handleNameChange" bind:clear="handleNameClear">
+      <ai-icon slot="prefix" name="icon-map" size="36rpx"></ai-icon>
+    </ai-input>
+    <text class="hint">Current value: {{name || '-'}}</text>
+  </ai-card>
+
+  <ai-modal open="{{modalOpen}}" title="Welcome to the island" bind:close="closeModal" bind:ok="closeModal">
+    <text>Modal is a native component overlay, not a Taro-compiled artifact.</text>
+  </ai-modal>
+</view>

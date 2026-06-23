@@ -1,0 +1,46 @@
+.page {
+  box-sizing: border-box;
+  min-height: 100vh;
+  padding: 36rpx;
+}
+
+.title {
+  display: block;
+  color: #6f4f28;
+  font-size: 44rpx;
+  font-weight: 900;
+}
+
+.subtitle {
+  display: block;
+  margin-top: 12rpx;
+  margin-bottom: 32rpx;
+  color: #9b7b55;
+  font-size: 26rpx;
+  line-height: 1.5;
+}
+
+.section {
+  margin-bottom: 28rpx;
+}
+
+.section-title {
+  display: block;
+  margin-bottom: 20rpx;
+  font-size: 32rpx;
+  font-weight: 800;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+  align-items: center;
+}
+
+.hint {
+  display: block;
+  margin-top: 16rpx;
+  color: #9b7b55;
+  font-size: 24rpx;
+}

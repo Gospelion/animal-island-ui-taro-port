@@ -1,0 +1,9 @@
+{
+  "name": "examples-weapp-demo",
+  "version": "0.0.0-spike.0",
+  "private": true,
+  "description": "Native WeChat demo for the Animal-Island-UI spike.",
+  "dependencies": {
+    "@animal-island-ui/weapp": "0.0.0-spike.0"
+  }
+}

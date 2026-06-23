@@ -1,0 +1,26 @@
+{
+  "name": "@animal-island-ui/taro",
+  "version": "0.0.0-spike.0",
+  "private": true,
+  "description": "Taro React components for the Animal-Island-UI spike.",
+  "license": "SEE LICENSE IN ../../LICENSE",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json && node scripts/copy-assets.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "peerDependencies": {
+    "@tarojs/components": "^4.0.0",
+    "@tarojs/taro": "^4.0.0",
+    "react": ">=18.0.0"
+  },
+  "dependencies": {
+    "@animal-island-ui/core": "0.0.0-spike.0"
+  }
+}

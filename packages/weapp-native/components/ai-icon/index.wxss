@@ -1,0 +1,40 @@
+.ai-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 28%;
+  border: 3rpx solid rgba(111, 79, 40, 0.14);
+  box-shadow: inset 0 -4rpx 0 rgba(111, 79, 40, 0.12);
+}
+
+.ai-icon::after {
+  content: "";
+  width: 42%;
+  height: 42%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.ai-icon-img::after {
+  display: none;
+}
+
+.ai-icon-icon-miles { background: #f4cf58; }
+.ai-icon-icon-camera { background: #82d5bb; }
+.ai-icon-icon-chat { background: #9bd7f4; }
+.ai-icon-icon-critterpedia { background: #f8dc75; }
+.ai-icon-icon-design { background: #9fd38a; }
+.ai-icon-icon-diy { background: #f5b36a; }
+.ai-icon-icon-helicopter { background: #ef8b7d; }
+.ai-icon-icon-map { background: #cdb5f8; }
+.ai-icon-icon-shopping { background: #f7b6c8; }
+.ai-icon-icon-variant { background: #b9dc75; }
+
+.ai-icon-bounce {
+  animation: ai-icon-bounce 1.2s ease-in-out infinite;
+}
+
+@keyframes ai-icon-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8rpx); }
+}

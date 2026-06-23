@@ -1,0 +1,12 @@
+<image
+  wx:if="{{src}}"
+  class="ai-icon ai-icon-img {{bounce ? 'ai-icon-bounce' : ''}} {{customClass}}"
+  style="width: {{size}}; height: {{size}}; {{customStyle}}"
+  src="{{src}}"
+  mode="aspectFit"
+/>
+<view
+  wx:else
+  class="ai-icon ai-icon-{{name}} {{bounce ? 'ai-icon-bounce' : ''}} {{customClass}}"
+  style="width: {{size}}; height: {{size}}; {{customStyle}}"
+></view>

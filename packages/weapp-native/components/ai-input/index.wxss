@@ -1,0 +1,23 @@
+@import "../../styles/common.wxss";
+
+.ai-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  box-sizing: border-box;
+  color: var(--ai-text);
+  background: var(--ai-paper);
+  border: 4rpx solid var(--ai-border);
+  border-radius: 999rpx;
+  box-shadow: 0 8rpx 18rpx var(--ai-shadow);
+}
+
+.ai-input-small { min-height: 64rpx; padding: 0 20rpx; }
+.ai-input-middle { min-height: 84rpx; padding: 0 28rpx; }
+.ai-input-large { min-height: 100rpx; padding: 0 34rpx; }
+.ai-input-error { border-color: var(--ai-danger); }
+.ai-input-warning { border-color: #f0ad3d; }
+.ai-input-disabled { opacity: 0.55; }
+.ai-input-no-shadow { box-shadow: none; }
+.ai-input-control { flex: 1; min-width: 0; color: var(--ai-text); font-size: 28rpx; }
+.ai-input-clear { width: 42rpx; height: 42rpx; border-radius: 50%; text-align: center; line-height: 42rpx; color: var(--ai-muted); background: rgba(111, 79, 40, 0.1); }

@@ -1,0 +1,13 @@
+<view wx:if="{{open}}" class="ai-modal-mask" style="{{maskStyle}}" bindtap="handleMaskTap">
+  <view class="ai-modal {{customClass}}" style="width: {{width}}; {{customStyle}}" catchtap="noop">
+    <view wx:if="{{title}}" class="ai-modal-title">{{title}}</view>
+    <view class="ai-modal-body">
+      <slot></slot>
+    </view>
+    <view wx:if="{{showFooter}}" class="ai-modal-footer">
+      <slot name="footer"></slot>
+      <ai-button size="small" type="default" bind:tap="handleClose">取消</ai-button>
+      <ai-button size="small" type="primary" bind:tap="handleOk">确定</ai-button>
+    </view>
+  </view>
+</view>

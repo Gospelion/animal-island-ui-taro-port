@@ -1,2 +1,118 @@
-# animal-island-ui-taro-port
-🏝️ An unofficial Taro &amp; React port of guokaigdg/animal-island-ui, bringing the charming Animal Crossing-styled UI to WeChat Mini Programs and H5.  
+﻿# animal-island-ui-taro-port
+
+> 💡 **致谢与声明**  
+> 本项目是 [guokaigdg/animal-island-ui](https://github.com/guokaigdg/animal-island-ui)（原 React Web 版）的**多端小程序移植版本**。  
+> - 核心的视觉设计、像素动画及创意均归原作者 **@guokaigdg** 所有。  
+> - 本项目仅使用 Taro + React 进行小程序的生态适配与重构，方便小程序开发者使用。  
+> - 鉴于原作者意愿，本项目**严格禁止任何商业用途**。
+
+## 项目简介
+
+本仓库是将 `animal-island-ui` 移植到小程序生态的 Spike v0 验证项目，目标不是一次性完成全量迁移，而是先验证双线方案是否成立。
+
+当前采用两条产物线并行：
+
+- `packages/taro-ui`：面向 Taro 开发者的 React + Taro 组件库。
+- `packages/weapp-native`：面向纯微信小程序开发者的原生组件库。
+
+微信原生组件库**不依赖 Taro 反向编译**。Taro 编译产物后续可以作为参考或辅助实验，但不是原生组件库的架构基础。
+
+## Spike v0 范围
+
+本阶段只验证 5 个代表组件：
+
+- `Button`
+- `Card`
+- `Icon`
+- `Input`
+- `Modal`
+
+以下组件暂不进入 Spike v0：
+
+- `Select`：需要单独比较原生 `picker` 与自绘弹层方案。
+- `Loading`：后续会定义为“小程序专用轻动画组件”，不承诺复刻 Web 版 GSAP/MotionPath 动效。
+- `Table`、`CodeBlock`、`Tooltip`、`Form`：暂不迁移。
+
+## API 原则
+
+本项目优先保证视觉风格一致，API 不强求两条产物线完全同名。
+
+- Taro 线使用 React 习惯：`children`、`onClick`、`className`、`style`。
+- 微信原生线使用小程序习惯：`slot`、`bind:tap`、`custom-class`、`custom-style`。
+
+Spike v0 中有几个刻意保留的平台差异：
+
+- Taro `Input` 的 `onChange` 接收 `{ value, event }`，其中 `event` 是 Taro 原始输入事件；点击清除按钮时 `event` 为 `{ type: 'clear' }`。
+- 微信原生 `ai-input` 的 `bind:change` 接收小程序事件，业务值位于 `event.detail.value`；`bind:clear` 不额外携带值。
+- Taro `Modal` 使用 `footer={null}` 隐藏 footer，`footer={undefined}` 使用默认取消/确定按钮，传入节点时渲染自定义 footer。
+- 微信原生 `ai-modal` 使用 `show-footer="{{false}}"` 隐藏 footer；提供 `slot="footer"` 时会追加到默认按钮前，Spike v0 暂不实现“有 footer slot 就替换默认 footer”的探测逻辑。
+- 微信原生组件的 `custom-class` 和 `custom-style` 只作用在组件根节点或主面板节点，用于外层间距、宽度、阴影等安全覆盖；内部结构类名不作为稳定 API。
+
+## 目录结构
+
+```text
+packages/
+  core/          共享 token、图标元信息、工具函数
+  taro-ui/       Taro React 组件
+  weapp-native/  微信小程序原生组件
+examples/
+  taro-demo/     Taro 示例
+  weapp-demo/    微信原生小程序示例
+```
+
+## 常用命令
+
+```bash
+npm install
+npm run typecheck
+npm run build:all
+npm run test
+npm run check:weapp-structure
+npm run build:demo
+npm run deploy
+npm run build:h5 -w examples-taro-demo
+npm run build:weapp -w examples-taro-demo
+npm run demo:taro:h5
+npm run demo:taro:weapp
+```
+
+`examples/weapp-demo` 用于验证原生微信组件包的接入方式。安装依赖后，需要在微信开发者工具中执行“构建 npm”再预览。
+
+## GitHub Pages Demo
+
+本仓库效仿上游 demo 发布方式，只发布 Taro H5 demo 到 GitHub Pages：
+
+```bash
+npm run build:demo
+npm run deploy
+```
+
+- `build:demo` 会先构建 `packages/core` 和 `packages/taro-ui`，再构建 `examples/taro-demo` 的 H5 产物，并生成 `examples/taro-demo/dist/index.html`。
+- `deploy` 会执行 `build:demo`，然后使用 `gh-pages -d examples/taro-demo/dist` 发布。
+- 默认 GitHub Pages base path 是 `/animal-island-ui-taro-port/`。如果仓库名不同，可以在构建时设置 `TARO_PUBLIC_PATH`，例如 `TARO_PUBLIC_PATH=/your-repo/ npm run build:demo`。
+- `examples/weapp-demo` 是微信原生小程序项目，不发布到 github.io；它仍通过微信开发者工具验证。
+
+## Spike v0 验证记录
+
+2026-06-23 已重新恢复依赖并通过自动验证：
+
+- `npm run typecheck`
+- `npm run build:all`
+- `npm run test`
+- `npm run build:h5 -w examples-taro-demo`
+- `npm run build:weapp -w examples-taro-demo`
+
+已知情况：
+
+- `npm install` 后 npm audit 报告 `39 vulnerabilities`，主要来自 Taro/webpack 依赖树；Spike v0 不执行 `npm audit fix --force`。
+- H5 构建有入口体积 warning：`app` 入口约 `298 KiB`，Spike 阶段暂接受。
+- 微信原生 demo 仍需在微信开发者工具中打开 `examples/weapp-demo`，执行“构建 npm”并做真机或模拟器视觉验收。
+
+## 版权与许可
+
+本项目基于上游 MIT 许可项目 `guokaigdg/animal-island-ui` 进行移植验证。
+
+- 来自上游项目的代码、设计描述及派生修改，保留上游 MIT License 与版权声明。详见 [LICENSE.upstream](./LICENSE.upstream) 与 [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md)。
+- 本仓库新增的独立代码默认使用 [LICENSE](./LICENSE) 中声明的 MIT License，除非具体文件另有说明。
+- 本项目尊重原作者关于学习、研究、非商业展示用途的意愿，不鼓励也不允许将本移植项目用于商业用途。
+- 本项目不是任天堂官方产品，与 Nintendo Co., Ltd. 无任何关联、授权或合作关系。

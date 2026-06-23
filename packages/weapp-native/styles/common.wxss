@@ -1,0 +1,10 @@
+page {
+  --ai-text: #6f4f28;
+  --ai-muted: #9b7b55;
+  --ai-paper: #fffdf0;
+  --ai-cream: #fff8df;
+  --ai-border: #d8bd86;
+  --ai-primary: #16b8aa;
+  --ai-danger: #e76767;
+  --ai-shadow: rgba(95, 73, 39, 0.18);
+}

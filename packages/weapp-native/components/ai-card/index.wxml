@@ -1,0 +1,7 @@
+<view
+  class="ai-card {{type === 'dashed' ? 'ai-card-dashed' : ''}} {{color !== 'default' ? 'ai-card-' + color : ''}} {{pattern !== 'none' ? 'ai-pattern-' + pattern : ''}} {{customClass}}"
+  style="{{customStyle}}"
+  bindtap="handleTap"
+>
+  <slot></slot>
+</view>

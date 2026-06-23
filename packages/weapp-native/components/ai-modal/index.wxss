@@ -1,0 +1,45 @@
+@import "../../styles/common.wxss";
+
+.ai-modal-mask {
+  position: fixed;
+  z-index: 9000;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32rpx;
+  background: rgba(53, 43, 29, 0.42);
+}
+
+.ai-modal {
+  box-sizing: border-box;
+  max-width: 92vw;
+  padding: 36rpx;
+  color: var(--ai-text);
+  background: var(--ai-paper);
+  border: 5rpx solid #f2dfad;
+  border-radius: 44rpx;
+  box-shadow: 0 18rpx 42rpx rgba(53, 43, 29, 0.24);
+}
+
+.ai-modal-title {
+  margin-bottom: 20rpx;
+  font-size: 34rpx;
+  font-weight: 800;
+}
+
+.ai-modal-body {
+  color: var(--ai-text);
+  font-size: 28rpx;
+  line-height: 1.7;
+}
+
+.ai-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20rpx;
+  margin-top: 32rpx;
+}

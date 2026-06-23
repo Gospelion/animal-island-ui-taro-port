@@ -1,0 +1,10 @@
+<button
+  class="ai-btn ai-btn-{{type}} ai-btn-{{size}} {{danger ? 'ai-btn-danger' : ''}} {{ghost ? 'ai-btn-ghost' : ''}} {{block ? 'ai-btn-block' : ''}} {{loading ? 'ai-btn-loading' : ''}} {{disabled || loading ? 'ai-btn-disabled' : ''}} {{customClass}}"
+  style="{{customStyle}}"
+  disabled="{{disabled}}"
+  bindtap="handleTap"
+>
+  <view wx:if="{{loading}}" class="ai-btn-spinner"></view>
+  <slot name="icon"></slot>
+  <slot></slot>
+</button>

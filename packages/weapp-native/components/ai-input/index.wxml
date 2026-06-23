@@ -1,0 +1,12 @@
+<view class="ai-input-wrap ai-input-{{size}} {{status ? 'ai-input-' + status : ''}} {{disabled ? 'ai-input-disabled' : ''}} {{shadow ? '' : 'ai-input-no-shadow'}} {{customClass}}" style="{{customStyle}}">
+  <slot name="prefix"></slot>
+  <input
+    class="ai-input-control"
+    disabled="{{disabled}}"
+    value="{{innerValue}}"
+    placeholder="{{placeholder}}"
+    bindinput="handleInput"
+  />
+  <text wx:if="{{allowClear && innerValue && !disabled}}" class="ai-input-clear" bindtap="handleClear">x</text>
+  <slot name="suffix"></slot>
+</view>

@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "ai-button": "../ai-button/index"
+  }
+}

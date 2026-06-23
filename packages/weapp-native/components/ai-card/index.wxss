@@ -1,0 +1,43 @@
+@import "../../styles/common.wxss";
+
+.ai-card {
+  position: relative;
+  padding: 32rpx;
+  overflow: hidden;
+  color: var(--ai-text);
+  background: var(--ai-paper);
+  border: 4rpx solid rgba(111, 79, 40, 0.16);
+  border-radius: 36rpx;
+  box-shadow: 0 10rpx 24rpx var(--ai-shadow);
+}
+
+.ai-card-dashed { border-style: dashed; }
+.ai-card-app-pink { background: #f7b6c8; }
+.ai-card-purple { background: #cdb5f8; }
+.ai-card-app-blue { background: #9bd7f4; }
+.ai-card-app-yellow { background: #f8dc75; }
+.ai-card-app-orange { background: #f5b36a; }
+.ai-card-app-teal { background: #82d5bb; }
+.ai-card-app-green { background: #9fd38a; }
+.ai-card-app-red { background: #ef8b7d; }
+.ai-card-lime-green { background: #b9dc75; }
+.ai-card-yellow-green { background: #d8df74; }
+.ai-card-brown { background: #c9a46a; }
+.ai-card-warm-peach-pink { background: #f6b9a8; }
+
+.ai-pattern-default,
+.ai-pattern-app-pink,
+.ai-pattern-purple,
+.ai-pattern-app-blue,
+.ai-pattern-app-yellow,
+.ai-pattern-app-orange,
+.ai-pattern-app-teal,
+.ai-pattern-app-green,
+.ai-pattern-app-red,
+.ai-pattern-lime-green,
+.ai-pattern-yellow-green,
+.ai-pattern-brown,
+.ai-pattern-warm-peach-pink {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.45) 16%, transparent 17%);
+  background-size: 34rpx 34rpx;
+}

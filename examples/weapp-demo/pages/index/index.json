@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "ai-button": "@animal-island-ui/weapp/components/ai-button/index",
+    "ai-card": "@animal-island-ui/weapp/components/ai-card/index",
+    "ai-icon": "@animal-island-ui/weapp/components/ai-icon/index",
+    "ai-input": "@animal-island-ui/weapp/components/ai-input/index",
+    "ai-modal": "@animal-island-ui/weapp/components/ai-modal/index"
+  }
+}

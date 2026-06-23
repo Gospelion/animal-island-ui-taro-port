@@ -106,16 +106,18 @@ Spike v0 成功标准：
   - [x] `npm run test`
   - [x] `npm run build:h5 -w examples-taro-demo`
   - [x] `npm run build:weapp -w examples-taro-demo`
-- [ ] 在微信开发者工具中打开 `examples/weapp-demo`。
-- [ ] 对 `examples/weapp-demo` 执行“构建 npm”并预览。
-- [ ] 人工检查 5 个组件的视觉一致性：
-  - [ ] 颜色
-  - [ ] 圆角
-  - [ ] 阴影
-  - [ ] 间距
-  - [ ] 禁用态
-  - [ ] loading 态
-  - [ ] Modal 遮罩与按钮行为
+- [x] 为微信原生 demo 生成 npm 组件目录：
+  - [x] `npm run prepare:weapp-demo`
+- [x] 在微信开发者工具中打开 `examples/weapp-demo`。
+- [x] 预览 `examples/weapp-demo`，确认 `miniprogram_npm/@animal-island-ui/weapp` 组件可解析。
+- [x] 人工检查 5 个组件的视觉一致性：
+  - [x] 颜色
+  - [x] 圆角
+  - [x] 阴影
+  - [x] 间距
+  - [x] 禁用态
+  - [x] loading 态
+  - [x] Modal 遮罩与按钮行为
 - [x] 补充 Spike v0 截图或视觉验收记录。
 - [x] 根据实际预览结果更新 `SPIKE_REPORT.md`。
 
@@ -127,8 +129,9 @@ Spike v0 成功标准：
 - `npm run test` 通过。
 - `npm run build:h5 -w examples-taro-demo` 通过；仍有入口体积 warning，`app` 约 `298 KiB`。
 - `npm run build:weapp -w examples-taro-demo` 通过。
+- `npm run prepare:weapp-demo` 通过，已生成微信开发者工具需要的 `examples/weapp-demo/miniprogram_npm/@animal-island-ui/weapp`。
 - 沙箱内首次 H5 构建遇到 `spawn EPERM`，提升权限重跑后通过，判断为本地构建子进程权限问题。
-- 微信开发者工具预览、真机层级/滚动穿透/安全区检查仍需人工执行。
+- 微信开发者工具预览已由人工检查通过；5 个 Spike v0 组件视觉和基础交互未发现问题。
 
 ## 待办：组件与实现修正
 
@@ -136,7 +139,7 @@ Spike v0 成功标准：
   - 当前 Spike v0 使用轻量彩色 tile 表达内置 icon。
   - 最终资产策略不在 Spike v0 内拍板，后续需要决定是否迁移上游 SVG/PNG 资源，或重新设计小程序可控资源方案。
 - [x] 检查 `Input` 两线事件 payload 是否足够文档化。
-- [ ] 检查 `Modal` 在真机或开发者工具中的层级、滚动穿透、安全区表现。
+- [x] 检查 `Modal` 在真机或开发者工具中的层级、滚动穿透、安全区表现。
 - [x] 给原生 `ai-modal` 的 footer slot / 默认 footer 行为写清楚文档。
 - [x] 梳理 `custom-class`、`custom-style` 在原生组件中的覆盖边界。
 

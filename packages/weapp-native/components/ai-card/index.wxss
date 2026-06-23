@@ -9,9 +9,15 @@
   border: 4rpx solid rgba(111, 79, 40, 0.16);
   border-radius: 36rpx;
   box-shadow: 0 10rpx 24rpx var(--ai-shadow);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ai-card:active {
+  transform: translateY(2rpx) scale(0.995);
 }
 
 .ai-card-dashed { border-style: dashed; }
+.ai-card-dashed:active { border-color: rgba(111, 79, 40, 0.32); box-shadow: none; transform: none; }
 .ai-card-app-pink { background: #f7b6c8; }
 .ai-card-purple { background: #cdb5f8; }
 .ai-card-app-blue { background: #9bd7f4; }

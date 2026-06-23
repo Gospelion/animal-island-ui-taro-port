@@ -62,6 +62,7 @@ export const Button: React.FC<ButtonProps> = ({
         if (!inactive) onClick?.(event);
       }}
     >
+      {loading ? <View className="ai-btn-spinner" /> : null}
       {icon && !loading ? <View className="ai-btn-icon">{icon}</View> : null}
       {children ? <Text className="ai-btn-text">{children}</Text> : null}
     </TaroButton>

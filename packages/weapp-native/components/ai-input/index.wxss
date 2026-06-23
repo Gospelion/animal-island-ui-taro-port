@@ -10,14 +10,16 @@
   border: 4rpx solid var(--ai-border);
   border-radius: 999rpx;
   box-shadow: 0 8rpx 18rpx var(--ai-shadow);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
 }
 
 .ai-input-small { min-height: 64rpx; padding: 0 20rpx; }
 .ai-input-middle { min-height: 84rpx; padding: 0 28rpx; }
 .ai-input-large { min-height: 100rpx; padding: 0 34rpx; }
-.ai-input-error { border-color: var(--ai-danger); }
-.ai-input-warning { border-color: #f0ad3d; }
+.ai-input-error { border-color: var(--ai-danger); box-shadow: 0 8rpx 0 rgba(200, 78, 78, 0.25); }
+.ai-input-warning { border-color: #f0ad3d; box-shadow: 0 8rpx 0 rgba(240, 173, 61, 0.25); }
 .ai-input-disabled { opacity: 0.55; }
 .ai-input-no-shadow { box-shadow: none; }
 .ai-input-control { flex: 1; min-width: 0; color: var(--ai-text); font-size: 28rpx; }
-.ai-input-clear { width: 42rpx; height: 42rpx; border-radius: 50%; text-align: center; line-height: 42rpx; color: var(--ai-muted); background: rgba(111, 79, 40, 0.1); }
+.ai-input-clear { width: 42rpx; height: 42rpx; border-radius: 50%; text-align: center; line-height: 42rpx; color: var(--ai-muted); background: rgba(111, 79, 40, 0.1); transition: transform 0.18s ease, background-color 0.18s ease, color 0.18s ease; }
+.ai-input-clear:active { color: var(--ai-text); background: rgba(111, 79, 40, 0.16); transform: scale(1.08); }

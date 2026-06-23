@@ -9,6 +9,7 @@
 ## 项目简介
 
 本仓库是将 `animal-island-ui` 移植到小程序生态的 Spike v0 验证项目，目标不是一次性完成全量迁移，而是先验证双线方案是否成立。
+Demo页：https://gospelion.github.io/animal-island-ui-taro-port
 
 当前采用两条产物线并行：
 
@@ -68,6 +69,7 @@ npm run typecheck
 npm run build:all
 npm run test
 npm run check:weapp-structure
+npm run prepare:weapp-demo
 npm run build:demo
 npm run deploy
 npm run build:h5 -w examples-taro-demo
@@ -76,7 +78,18 @@ npm run demo:taro:h5
 npm run demo:taro:weapp
 ```
 
-`examples/weapp-demo` 用于验证原生微信组件包的接入方式。安装依赖后，需要在微信开发者工具中执行“构建 npm”再预览。
+`examples/weapp-demo` 用于验证原生微信组件包的接入方式。由于微信开发者工具不理解 npm workspace 的根级依赖布局，打开前需要先执行：
+
+```bash
+npm run prepare:weapp-demo
+```
+
+该命令会构建 `packages/weapp-native`，并生成：
+
+- `examples/weapp-demo/node_modules/@animal-island-ui/weapp`
+- `examples/weapp-demo/miniprogram_npm/@animal-island-ui/weapp`
+
+前者供 DevTools 执行“构建 npm”时读取，后者供页面 `usingComponents` 直接解析 `@animal-island-ui/weapp/components/...`。如果 Windows 提示文件被占用，先关闭微信开发者工具或停止编译，再重新执行该命令。
 
 ## GitHub Pages Demo
 
@@ -111,7 +124,7 @@ npm run build:demo
 
 - `npm install` 后 npm audit 报告 `39 vulnerabilities`，主要来自 Taro/webpack 依赖树；Spike v0 不执行 `npm audit fix --force`。
 - H5 构建有入口体积 warning：`app` 入口约 `298 KiB`，Spike 阶段暂接受。
-- 微信原生 demo 仍需在微信开发者工具中打开 `examples/weapp-demo`，执行“构建 npm”并做真机或模拟器视觉验收。
+- 微信原生 demo 已在微信开发者工具中完成 Spike v0 人工验收；后续更新原生组件后仍建议先执行 `npm run prepare:weapp-demo` 再预览。
 
 ## 版权与许可
 

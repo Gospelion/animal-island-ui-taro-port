@@ -2,8 +2,13 @@
   "usingComponents": {
     "ai-button": "@animal-island-ui/weapp/components/ai-button/index",
     "ai-card": "@animal-island-ui/weapp/components/ai-card/index",
+    "ai-checkbox": "@animal-island-ui/weapp/components/ai-checkbox/index",
+    "ai-divider": "@animal-island-ui/weapp/components/ai-divider/index",
     "ai-icon": "@animal-island-ui/weapp/components/ai-icon/index",
     "ai-input": "@animal-island-ui/weapp/components/ai-input/index",
-    "ai-modal": "@animal-island-ui/weapp/components/ai-modal/index"
+    "ai-modal": "@animal-island-ui/weapp/components/ai-modal/index",
+    "ai-radio": "@animal-island-ui/weapp/components/ai-radio/index",
+    "ai-switch": "@animal-island-ui/weapp/components/ai-switch/index",
+    "ai-title": "@animal-island-ui/weapp/components/ai-title/index"
   }
 }

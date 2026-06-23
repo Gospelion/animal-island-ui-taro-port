@@ -1,0 +1,75 @@
+@import "../../styles/common.wxss";
+
+.ai-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-width: 104rpx;
+  height: 56rpx;
+  box-sizing: border-box;
+  color: #fff;
+  background: #d4c9b4;
+  border: 5rpx solid #c4b89e;
+  border-radius: 999rpx;
+  box-shadow: inset 0 4rpx 8rpx rgba(114, 93, 66, 0.15);
+  transition: background-color .22s ease, border-color .22s ease, opacity .22s ease, transform .22s ease;
+}
+
+.ai-switch:active { transform: scale(.97); }
+.ai-switch-checked { background: #86d67a; border-color: #6fba2c; box-shadow: inset 0 4rpx 8rpx rgba(90, 158, 30, .2); }
+.ai-switch-small { min-width: 76rpx; height: 40rpx; }
+
+.ai-switch-handle {
+  position: absolute;
+  top: 50%;
+  left: 4rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42rpx;
+  height: 42rpx;
+  box-sizing: border-box;
+  background: #f7f3df;
+  border: 5rpx solid #c4b89e;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  transition: left .24s ease, border-color .24s ease;
+}
+
+.ai-switch-checked .ai-switch-handle { left: calc(100% - 46rpx); border-color: #6fba2c; }
+.ai-switch-small .ai-switch-handle { left: 2rpx; width: 28rpx; height: 28rpx; border-width: 4rpx; }
+.ai-switch-small.ai-switch-checked .ai-switch-handle { left: calc(100% - 30rpx); }
+
+.ai-switch-inner {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 16rpx 0 56rpx;
+  font-size: 22rpx;
+  font-weight: 800;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  text-shadow: 0 2rpx 2rpx rgba(0, 0, 0, .1);
+}
+
+.ai-switch-checked .ai-switch-inner { padding: 0 56rpx 0 16rpx; }
+.ai-switch-small .ai-switch-inner { padding: 0 12rpx 0 40rpx; font-size: 18rpx; }
+.ai-switch-small.ai-switch-checked .ai-switch-inner { padding: 0 40rpx 0 12rpx; }
+.ai-switch-disabled, .ai-switch-loading { opacity: .58; }
+.ai-switch-disabled:active, .ai-switch-loading:active { transform: none; }
+
+.ai-switch-spinner {
+  width: 20rpx;
+  height: 20rpx;
+  border: 4rpx solid #6fba2c;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: ai-spin .7s linear infinite;
+}
+
+.ai-switch:not(.ai-switch-checked) .ai-switch-spinner { border-color: #a89878; border-right-color: transparent; }
+
+@keyframes ai-spin {
+  to { transform: rotate(360deg); }
+}

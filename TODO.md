@@ -147,13 +147,23 @@ Spike v0 成功标准：
 
 如果 Spike v0 验证通过，下一批建议迁移：
 
-- [ ] `Switch`
-- [ ] `Checkbox`
-- [ ] `Radio`
-- [ ] `Title`
-- [ ] `Divider`
+- [x] `Switch`
+- [x] `Checkbox`
+- [x] `Radio`
+- [x] `Title`
+- [x] `Divider`
 
 这些组件相对低风险，适合继续验证双线迁移效率。
+
+本次下一批组件自动验证记录（2026-06-23）：
+
+- `npm run typecheck` 通过。
+- `npm run build:all` 通过。
+- `npm run test` 通过。
+- `npm run build:h5 -w examples-taro-demo` 通过；仍有入口体积 warning，`app` 约 `298 KiB`。
+- `npm run build:weapp -w examples-taro-demo` 通过。
+- `npm run prepare:weapp-demo` 通过，已同步生成原生微信 demo 的 npm 组件目录。
+- 沙箱内 Taro H5 / weapp 构建分别遇到 `spawn EPERM` 或无输出卡住；提升权限重跑后均通过，判断仍属于本地 Taro 构建子进程权限问题。
 
 ## 暂缓组件
 

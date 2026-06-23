@@ -1,0 +1,1 @@
+<view class="ai-divider ai-divider-{{type}} {{customClass}}" style="{{customStyle}}"></view>

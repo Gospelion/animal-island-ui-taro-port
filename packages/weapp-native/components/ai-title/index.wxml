@@ -1,0 +1,8 @@
+<view class="ai-title ai-title-{{size}} {{color !== 'default' ? 'ai-title-' + color : ''}} {{customClass}}" style="{{customStyle}}">
+  <view class="ai-title-back ai-title-back-left"></view>
+  <view class="ai-title-back ai-title-back-right"></view>
+  <view class="ai-title-fold ai-title-fold-left"></view>
+  <view class="ai-title-fold ai-title-fold-right"></view>
+  <view class="ai-title-front"></view>
+  <text class="ai-title-text"><slot></slot></text>
+</view>

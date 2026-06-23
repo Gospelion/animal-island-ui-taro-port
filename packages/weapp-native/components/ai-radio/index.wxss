@@ -1,0 +1,5 @@
+@import "../ai-checkbox/index.wxss";
+
+.ai-radio-item .ai-choice-box {
+  border-radius: 42%;
+}

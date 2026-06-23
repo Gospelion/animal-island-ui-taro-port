@@ -1,0 +1,10 @@
+<view
+  class="ai-switch ai-switch-{{size}} {{checked ? 'ai-switch-checked' : ''}} {{disabled ? 'ai-switch-disabled' : ''}} {{loading ? 'ai-switch-loading' : ''}} {{customClass}}"
+  style="{{customStyle}}"
+  bindtap="handleTap"
+>
+  <view class="ai-switch-handle">
+    <view wx:if="{{loading}}" class="ai-switch-spinner"></view>
+  </view>
+  <text class="ai-switch-inner">{{checked ? checkedText : uncheckedText}}</text>
+</view>

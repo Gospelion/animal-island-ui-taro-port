@@ -1,6 +1,11 @@
 <view class="page">
-  <text class="title">Animal-Island-UI Spike v0</text>
+  <text class="title">Animal-Island-UI Spike v1</text>
   <text class="subtitle">Native line: slot, bind events, custom-class/custom-style.</text>
+
+  <view class="title-wrap">
+    <ai-title color="app-teal" size="large">Island Kit</ai-title>
+  </view>
+  <ai-divider type="wave-yellow" custom-class="hero-divider"></ai-divider>
 
   <ai-card color="app-yellow" pattern="default" custom-class="section">
     <text class="section-title">Button</text>
@@ -18,6 +23,38 @@
       <ai-icon name="icon-camera" size="64rpx"></ai-icon>
       <ai-icon name="icon-shopping" size="64rpx"></ai-icon>
     </view>
+  </ai-card>
+
+  <ai-card color="app-green" custom-class="section">
+    <text class="section-title">Switch</text>
+    <view class="row">
+      <ai-switch checked="{{quietHours}}" checked-text="ON" unchecked-text="OFF" bind:change="handleQuietHoursChange"></ai-switch>
+      <ai-switch size="small" checked="{{quietHours}}" bind:change="handleQuietHoursChange"></ai-switch>
+      <ai-switch loading checked></ai-switch>
+    </view>
+    <text class="hint">Quiet hours: {{quietHours ? 'enabled' : 'disabled'}}</text>
+  </ai-card>
+
+  <ai-card color="warm-peach-pink" custom-class="section">
+    <text class="section-title">Checkbox</text>
+    <ai-checkbox options="{{taskOptions}}" value="{{tasks}}" bind:change="handleTasksChange"></ai-checkbox>
+    <text class="hint">Today: {{tasksText}}</text>
+  </ai-card>
+
+  <ai-card color="app-teal" custom-class="section">
+    <text class="section-title">Radio</text>
+    <ai-radio options="{{seasonOptions}}" value="{{season}}" bind:change="handleSeasonChange"></ai-radio>
+    <text class="hint">Season: {{season}}</text>
+  </ai-card>
+
+  <ai-card color="app-orange" custom-class="section">
+    <text class="section-title">Title and Divider</text>
+    <view class="title-stack">
+      <ai-title size="small" color="app-yellow">Small Tag</ai-title>
+      <ai-title color="purple">Ribbon Title</ai-title>
+    </view>
+    <ai-divider type="line-teal" custom-class="demo-divider"></ai-divider>
+    <ai-divider type="dashed-brown" custom-class="demo-divider"></ai-divider>
   </ai-card>
 
   <ai-card type="dashed" custom-class="section">

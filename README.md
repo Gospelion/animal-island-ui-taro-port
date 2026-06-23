@@ -8,7 +8,7 @@
 
 ## 项目简介
 
-本仓库是将 `animal-island-ui` 移植到小程序生态的 Spike v0 验证项目，目标不是一次性完成全量迁移，而是先验证双线方案是否成立。
+本仓库是将 `animal-island-ui` 移植到小程序生态的 Spike 验证项目，目标不是一次性完成全量迁移，而是先验证双线方案是否成立，再分批补齐低风险组件。
 Demo页：https://gospelion.github.io/animal-island-ui-taro-port
 
 当前采用两条产物线并行：
@@ -18,9 +18,9 @@ Demo页：https://gospelion.github.io/animal-island-ui-taro-port
 
 微信原生组件库**不依赖 Taro 反向编译**。Taro 编译产物后续可以作为参考或辅助实验，但不是原生组件库的架构基础。
 
-## Spike v0 范围
+## 已迁移组件范围
 
-本阶段只验证 5 个代表组件：
+Spike v0 已验证 5 个代表组件：
 
 - `Button`
 - `Card`
@@ -28,7 +28,15 @@ Demo页：https://gospelion.github.io/animal-island-ui-taro-port
 - `Input`
 - `Modal`
 
-以下组件暂不进入 Spike v0：
+下一批低风险组件已完成双线实现：
+
+- `Switch`
+- `Checkbox`
+- `Radio`
+- `Title`
+- `Divider`
+
+以下组件暂不进入当前批次：
 
 - `Select`：需要单独比较原生 `picker` 与自绘弹层方案。
 - `Loading`：后续会定义为“小程序专用轻动画组件”，不承诺复刻 Web 版 GSAP/MotionPath 动效。
@@ -48,6 +56,9 @@ Spike v0 中有几个刻意保留的平台差异：
 - Taro `Modal` 使用 `footer={null}` 隐藏 footer，`footer={undefined}` 使用默认取消/确定按钮，传入节点时渲染自定义 footer。
 - 微信原生 `ai-modal` 使用 `show-footer="{{false}}"` 隐藏 footer；提供 `slot="footer"` 时会追加到默认按钮前，Spike v0 暂不实现“有 footer slot 就替换默认 footer”的探测逻辑。
 - 微信原生组件的 `custom-class` 和 `custom-style` 只作用在组件根节点或主面板节点，用于外层间距、宽度、阴影等安全覆盖；内部结构类名不作为稳定 API。
+- Taro `Checkbox` / `Radio` 采用上游组选项语义：`options`、`value` / `defaultValue`、`onChange`。
+- 微信原生 `ai-checkbox` / `ai-radio` 使用 `options` 与 `value` 属性，变化值位于 `event.detail.value`。
+- 微信原生 `ai-switch` 使用 `checked` 属性与 `bind:change`，变化值位于 `event.detail.checked`。
 
 ## 目录结构
 
@@ -119,6 +130,7 @@ npm run build:demo
 - `npm run test`
 - `npm run build:h5 -w examples-taro-demo`
 - `npm run build:weapp -w examples-taro-demo`
+- `npm run prepare:weapp-demo`
 
 已知情况：
 

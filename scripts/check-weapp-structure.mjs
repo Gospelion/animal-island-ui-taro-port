@@ -3,7 +3,18 @@ import { join } from 'node:path';
 
 const root = process.cwd();
 const componentRoot = join(root, 'packages', 'weapp-native', 'components');
-const components = ['ai-button', 'ai-card', 'ai-icon', 'ai-input', 'ai-modal'];
+const components = [
+  'ai-button',
+  'ai-card',
+  'ai-icon',
+  'ai-input',
+  'ai-modal',
+  'ai-switch',
+  'ai-checkbox',
+  'ai-radio',
+  'ai-title',
+  'ai-divider'
+];
 const required = ['index.wxml', 'index.wxss', 'index.js', 'index.json'];
 
 const missing = [];

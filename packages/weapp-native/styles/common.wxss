@@ -5,6 +5,7 @@ page {
   --ai-cream: #fff8df;
   --ai-border: #d8bd86;
   --ai-primary: #16b8aa;
+  --ai-primary-dark: #0c958c;
   --ai-danger: #e76767;
   --ai-shadow: rgba(95, 73, 39, 0.18);
 }

@@ -1,0 +1,15 @@
+<view class="ai-choice-group ai-choice-{{direction}} {{disabled ? 'ai-choice-group-disabled' : ''}} {{customClass}}" style="{{customStyle}}">
+  <view
+    wx:for="{{renderedOptions}}"
+    wx:key="value"
+    data-index="{{index}}"
+    class="ai-choice-item ai-checkbox-item ai-choice-{{size}} {{item.checked ? 'ai-choice-checked' : ''}} {{disabled || item.disabled ? 'ai-choice-disabled' : ''}}"
+    bindtap="handleTap"
+  >
+    <view class="ai-choice-box">
+      <view class="ai-choice-splash"></view>
+      <view class="ai-choice-check"></view>
+    </view>
+    <text class="ai-choice-label">{{item.label}}</text>
+  </view>
+</view>

@@ -1,3 +1,3 @@
 export default definePageConfig({
-  navigationBarTitleText: 'Spike v0'
+  navigationBarTitleText: 'Spike v1'
 });

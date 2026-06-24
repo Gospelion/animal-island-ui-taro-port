@@ -33,3 +33,6 @@ export type { CollapseProps } from './components/Collapse';
 
 export { CodeBlock } from './components/CodeBlock';
 export type { CodeBlockProps } from './components/CodeBlock';
+
+export { Table } from './components/Table';
+export type { TableAlign, TableColumn, TableProps, TableRowKey, TableScroll } from './components/Table';

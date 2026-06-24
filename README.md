@@ -37,12 +37,13 @@ Spike v0 已验证 5 个代表组件：
 - `Divider`
 - `Collapse`
 - `CodeBlock`
+- `Table`
 
 以下组件暂不进入当前批次：
 
 - `Select`：需要单独比较原生 `picker` 与自绘弹层方案。
 - `Loading`：后续会定义为“小程序专用轻动画组件”，不承诺复刻 Web 版 GSAP/MotionPath 动效。
-- `Table`、`Tooltip`、`Form`：暂不迁移。
+- `Tooltip`、`Form`：暂不迁移。
 
 ## API 原则
 
@@ -66,6 +67,8 @@ Spike v0 中有几个刻意保留的平台差异：
 - 微信原生 `ai-collapse` 使用 `question` 属性与默认 slot，变化值位于 `event.detail.expanded`。
 - Taro `CodeBlock` 与上游保持一致，使用 `code`、`style`、`className`，仅支持 JSX / TS 风格的内置高亮。
 - 微信原生 `ai-code-block` 使用 `code`、`custom-class`、`custom-style`，不提供 `language` 或复制按钮。
+- Taro `Table` 使用 `ScrollView + View` 栅格实现，支持 `columns`、`dataSource`、`rowKey`、`striped`、`showHeader`、`loading`、`emptyText`、`scroll`、`column.render` 和 `onRowClick`。
+- 微信原生 `ai-table` 使用 `columns`、`data-source`、`row-key`、`striped`、`show-header`、`loading`、`empty-text`、`scroll-x`、`scroll-y`；`bind:rowtap` 的变化值位于 `event.detail`，原生 v1 不支持函数式单元格 `render`。
 
 ## 目录结构
 

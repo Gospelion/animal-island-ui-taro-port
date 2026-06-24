@@ -13,12 +13,14 @@ import {
   Modal,
   Radio,
   Switch,
+  Table,
   Title,
+  type TableColumn,
   type TitleColor
 } from '@animal-island-ui/taro';
 import './index.css';
 
-type PageKey = 'home' | 'title' | 'button' | 'input' | 'switch' | 'card' | 'modal' | 'divider' | 'icon' | 'checkbox' | 'radio' | 'collapse' | 'codeblock';
+type PageKey = 'home' | 'title' | 'button' | 'input' | 'switch' | 'card' | 'modal' | 'divider' | 'icon' | 'checkbox' | 'radio' | 'collapse' | 'codeblock' | 'table';
 
 const pageInfo: Record<PageKey, { title: string; desc: string; badge: string }> = {
   home: { title: 'Animal Island UI', desc: 'Animal 风格的 Taro 组件展示页，复刻原仓库 demo 的首页、侧边导航和组件文档逻辑。', badge: 'Taro' },
@@ -33,7 +35,8 @@ const pageInfo: Record<PageKey, { title: string; desc: string; badge: string }> 
   checkbox: { title: 'Checkbox 多选框', desc: '支持受控 / 非受控、方向、尺寸和禁用选项。', badge: 'controlled' },
   radio: { title: 'Radio 单选框', desc: '支持受控 / 非受控、方向、尺寸和禁用选项。', badge: 'controlled' },
   collapse: { title: 'Collapse 折叠面板', desc: 'FAQ 风格的状态型折叠面板，支持受控、默认展开和禁用状态。', badge: 'stateful' },
-  codeblock: { title: 'CodeBlock 代码高亮', desc: 'Dark JSX / TS code block with original regex highlighting, 14px font size, and 600 font weight.', badge: 'JSX/TS' }
+  codeblock: { title: 'CodeBlock 代码高亮', desc: 'Dark JSX / TS code block with original regex highlighting, 14px font size, and 600 font weight.', badge: 'JSX/TS' },
+  table: { title: 'Table 表格', desc: 'ScrollView + View data grid with striped rows, loading, empty state, and horizontal scrolling.', badge: 'grid' }
 };
 
 const menu = [
@@ -51,7 +54,8 @@ const menu = [
       ['checkbox', 'Checkbox 多选框'],
       ['radio', 'Radio 单选框'],
       ['collapse', 'Collapse 折叠面板', true],
-      ['codeblock', 'CodeBlock 代码高亮', true]
+      ['codeblock', 'CodeBlock 代码高亮', true],
+      ['table', 'Table 表格', true]
     ]
   },
   {
@@ -61,8 +65,7 @@ const menu = [
       ['select', 'Select 选择器', false, true],
       ['tabs', 'Tabs 标签页', false, true],
       ['loading', 'Loading 加载', true, true],
-      ['form', 'Form 表单', true, true],
-      ['table', 'Table 表格', false, true]
+      ['form', 'Form 表单', true, true]
     ]
   }
 ] as const;
@@ -77,22 +80,35 @@ function Code({ children }: { children: string }) {
   return <CodeBlock code={children} className="demo-code-block" />;
 }
 
+interface ApiRow extends Record<string, unknown> {
+  property: string;
+  description: string;
+  type: string;
+}
+
+const apiColumns: TableColumn<ApiRow>[] = [
+  { title: '属性', dataIndex: 'property', width: 220 },
+  { title: '说明', dataIndex: 'description', width: 320 },
+  { title: '类型', dataIndex: 'type', width: 320 }
+];
+
 function Api({ rows }: { rows: string[][] }) {
+  const dataSource = rows.map(([property, description, type]) => ({
+    key: property,
+    property,
+    description,
+    type
+  }));
+
   return (
-    <View className="api-table">
-      <View className="api-row api-head">
-        <Text>属性</Text>
-        <Text>说明</Text>
-        <Text>类型</Text>
-      </View>
-      {rows.map((row) => (
-        <View className="api-row" key={row[0]}>
-          <Text>{row[0]}</Text>
-          <Text>{row[1]}</Text>
-          <Text>{row[2]}</Text>
-        </View>
-      ))}
-    </View>
+    <Table
+      className="api-table"
+      columns={apiColumns}
+      dataSource={dataSource}
+      rowKey="key"
+      scroll={{ x: 860 }}
+      striped={false}
+    />
   );
 }
 
@@ -376,8 +392,84 @@ export default App;`;
   );
 }
 
+interface TableDemoRow extends Record<string, unknown> {
+  key: string;
+  name: string;
+  island: string;
+  fruit: string;
+  hobby: string;
+  bells: number;
+}
+
+function TableDemo() {
+  const [striped, setStriped] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [selected, setSelected] = useState('none');
+
+  const rows: TableDemoRow[] = [
+    { key: '1', name: 'Molly', island: 'Maple Bay', fruit: 'Apple', hobby: 'Music', bells: 1280 },
+    { key: '2', name: 'Roald', island: 'Snowcap', fruit: 'Orange', hobby: 'Sport', bells: 960 },
+    { key: '3', name: 'Fauna', island: 'Cedar Cove', fruit: 'Pear', hobby: 'Reading', bells: 1540 },
+    { key: '4', name: 'Ketchup', island: 'Sunny Dune', fruit: 'Peach', hobby: 'Picnic', bells: 1120 }
+  ];
+
+  const columns: TableColumn<TableDemoRow>[] = [
+    { title: 'Villager', dataIndex: 'name', width: 170 },
+    { title: 'Island', dataIndex: 'island', width: 210 },
+    { title: 'Fruit', dataIndex: 'fruit', width: 150 },
+    {
+      title: 'Hobby',
+      dataIndex: 'hobby',
+      width: 160,
+      render: (value) => <Text className="table-tag">{String(value)}</Text>
+    },
+    { title: 'Bells', dataIndex: 'bells', width: 150, align: 'right' }
+  ];
+
+  const handleLoading = () => {
+    setLoading(true);
+    setTimeout(() => setLoading(false), 1200);
+  };
+
+  return (
+    <>
+      <Section title="Basic grid" badge={striped ? 'striped' : 'plain'}>
+        <View className="demo-row">
+          <Button type={striped ? 'primary' : 'dashed'} onClick={() => setStriped((value) => !value)}>
+            Toggle striped
+          </Button>
+          <Button type="primary" loading={loading} disabled={loading} onClick={handleLoading}>
+            Simulate loading
+          </Button>
+        </View>
+        <View className="table-demo-wrap">
+          <Table
+            columns={columns}
+            dataSource={rows}
+            striped={striped}
+            loading={loading}
+            scroll={{ x: 840 }}
+            onRowClick={(record) => setSelected(record.name)}
+          />
+        </View>
+        <Text className="hint">Selected row: {selected}</Text>
+      </Section>
+
+      <Section title="Empty and headerless states">
+        <View className="demo-col">
+          <Table columns={columns.slice(0, 3)} dataSource={[]} emptyText="No island records yet" />
+          <Table columns={columns.slice(0, 3)} dataSource={rows.slice(0, 2)} showHeader={false} striped={false} />
+        </View>
+      </Section>
+
+      <Code>{"import { Table } from '@animal-island-ui/taro';\n<Table columns={columns} dataSource={rows} scroll={{ x: 840 }} />"}</Code>
+      <Api rows={[['columns', 'Column configuration', 'TableColumn[]'], ['dataSource', 'Row data', 'Record<string, unknown>[]'], ['scroll', 'Horizontal / vertical scroll size', '{ x?: number | string; y?: number | string }'], ['onRowClick', 'Row click callback', '(record, index) => void']]} />
+    </>
+  );
+}
+
 function ComponentPage({ active }: { active: PageKey }) {
-  const Demo = useMemo(() => ({ title: TitleDemo, button: ButtonDemo, input: InputDemo, switch: SwitchDemo, card: CardDemo, modal: ModalDemo, divider: DividerDemo, icon: IconDemo, checkbox: CheckboxDemo, radio: RadioDemo, collapse: CollapseDemo, codeblock: CodeBlockDemo, home: () => null })[active], [active]);
+  const Demo = useMemo(() => ({ title: TitleDemo, button: ButtonDemo, input: InputDemo, switch: SwitchDemo, card: CardDemo, modal: ModalDemo, divider: DividerDemo, icon: IconDemo, checkbox: CheckboxDemo, radio: RadioDemo, collapse: CollapseDemo, codeblock: CodeBlockDemo, table: TableDemo, home: () => null })[active], [active]);
   return (
     <ScrollView scrollY className="component-scroll">
       <View className="component-doc">

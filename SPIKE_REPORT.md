@@ -65,4 +65,4 @@ If Spike v0 validates in both demos, the next migration batch should be:
 - `Title`
 - `Divider`
 
-Keep `Select`, `Loading`, `Table`, and `Tooltip` outside the next batch until their platform-specific decisions are settled.
+`Table` has since been migrated with a `ScrollView + View` grid strategy for both Taro and native WeChat. Keep `Select`, `Loading`, and `Tooltip` outside the next batch until their platform-specific decisions are settled.

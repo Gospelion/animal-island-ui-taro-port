@@ -71,6 +71,17 @@
     <text class="hint">Season: {{season}}</text>
   </ai-card>
 
+  <ai-card color="app-yellow" custom-class="section">
+    <text class="section-title">Table</text>
+    <ai-table
+      columns="{{tableColumns}}"
+      data-source="{{tableRows}}"
+      scroll-x="680rpx"
+      bind:rowtap="handleTableRowTap"
+    ></ai-table>
+    <text class="hint">Selected row: {{tableSelection}}</text>
+  </ai-card>
+
   <ai-card color="app-orange" custom-class="section">
     <text class="section-title">Title and Divider</text>
     <view class="title-stack">

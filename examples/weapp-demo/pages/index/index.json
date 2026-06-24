@@ -11,6 +11,7 @@
     "ai-modal": "@animal-island-ui/weapp/components/ai-modal/index",
     "ai-radio": "@animal-island-ui/weapp/components/ai-radio/index",
     "ai-switch": "@animal-island-ui/weapp/components/ai-switch/index",
+    "ai-table": "@animal-island-ui/weapp/components/ai-table/index",
     "ai-title": "@animal-island-ui/weapp/components/ai-title/index"
   }
 }

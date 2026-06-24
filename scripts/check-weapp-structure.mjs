@@ -15,7 +15,8 @@ const components = [
   'ai-title',
   'ai-divider',
   'ai-collapse',
-  'ai-code-block'
+  'ai-code-block',
+  'ai-table'
 ];
 const required = ['index.wxml', 'index.wxss', 'index.js', 'index.json'];
 

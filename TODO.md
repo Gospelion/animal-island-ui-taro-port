@@ -20,7 +20,7 @@
 
 ## 当前状态
 
-已完成 Spike v0、下一批低风险组件迁移、`Collapse` 和 `CodeBlock` 首版迁移。当前双线合计 12 个组件可用：
+已完成 Spike v0、下一批低风险组件迁移、`Collapse`、`CodeBlock` 和 `Table` 首版迁移。当前双线合计 13 个组件可用：
 
 - `Button` / `ai-button`
 - `Card` / `ai-card`
@@ -34,6 +34,7 @@
 - `Divider` / `ai-divider`
 - `Collapse` / `ai-collapse`
 - `CodeBlock` / `ai-code-block`
+- `Table` / `ai-table`
 
 已完成的必要工程工作：
 
@@ -65,14 +66,15 @@
 
 ### 组件验收
 
-- [ ] 人工预览 Taro H5、Taro weapp 和微信原生 demo 中的 12 个已迁移组件。
-- [ ] 重点确认 `Switch`、`Checkbox`、`Radio`、`Title`、`Divider`、`Collapse`、`CodeBlock` 的视觉、交互和事件表现。
+- [ ] 人工预览 Taro H5、Taro weapp 和微信原生 demo 中的 13 个已迁移组件。
+- [ ] 重点确认 `Switch`、`Checkbox`、`Radio`、`Title`、`Divider`、`Collapse`、`CodeBlock`、`Table` 的视觉、交互和事件表现。
 - [ ] 为人工预览补充简要验收记录或截图。
 
 ### 文档与 API
 
 - [ ] 在 `README.md` 中补充已迁移组件的简要 API 示例。
-- [ ] 记录 Taro / 微信原生事件 payload 差异，优先覆盖 `Switch`、`Checkbox`、`Radio`、`Collapse`、`CodeBlock`。
+- [ ] 记录 Taro / 微信原生事件 payload 差异，优先覆盖 `Switch`、`Checkbox`、`Radio`、`Collapse`、`CodeBlock`、`Table`。
+- [ ] 记录 `Table` 原生 v1 边界：`ai-table` 只支持按 `dataIndex` 渲染文本单元格，不支持 Taro `column.render` 函数式单元格。
 - [ ] 记录原生组件 `custom-class` / `custom-style` 的覆盖边界。
 - [ ] 根据人工验收结果更新 `SPIKE_REPORT.md` 或新增迁移记录。
 
@@ -98,7 +100,6 @@
 
 - [ ] `Select`: 原生 `picker` 样式控制弱，自绘弹层需要处理层级、滚动穿透、键盘和安全区。
 - [ ] `Loading`: 不迁移 Web 版 GSAP / MotionPath，后续定义为小程序专用轻动画组件。
-- [ ] `Table`: Web `<table>` 不可直接平移，需要 `ScrollView + View` 栅格方案。
 - [ ] `Tooltip`: 小程序触发方式、层级、定位模型与 Web 差异较大。
 - [ ] `Form`: 字段注册、校验展示、滚动定位需要单独拆。
 

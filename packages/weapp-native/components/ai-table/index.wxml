@@ -1,0 +1,56 @@
+<view class="ai-table-wrap {{customClass}}" style="{{customStyle}}">
+  <scroll-view
+    scroll-x="{{enableScrollX}}"
+    scroll-y="{{enableScrollY}}"
+    class="ai-table-scroll"
+    style="{{scrollStyle}}"
+  >
+    <view class="ai-table" style="{{contentStyle}}">
+      <view wx:if="{{showHeader}}" class="ai-table-row ai-table-head-row">
+        <view
+          wx:for="{{normalizedColumns}}"
+          wx:key="key"
+          class="ai-table-cell ai-table-head-cell ai-table-align-{{item.align}}"
+          style="{{item.style}}"
+        >
+          <text class="ai-table-text">{{item.title}}</text>
+        </view>
+      </view>
+
+      <view wx:if="{{rows.length === 0}}" class="ai-table-empty">
+        <view class="ai-table-empty-icon">
+          <view class="ai-table-empty-bar ai-table-empty-bar-1"></view>
+          <view class="ai-table-empty-bar ai-table-empty-bar-2"></view>
+          <view class="ai-table-empty-bar ai-table-empty-bar-3"></view>
+        </view>
+        <text class="ai-table-empty-text">{{emptyText}}</text>
+      </view>
+
+      <view
+        wx:else
+        wx:for="{{rows}}"
+        wx:for-item="row"
+        wx:for-index="rowIndex"
+        wx:key="key"
+        data-index="{{row.index}}"
+        class="ai-table-row {{striped && rowIndex % 2 === 1 ? 'ai-table-row-striped' : ''}}"
+        bindtap="handleRowTap"
+      >
+        <view
+          wx:for="{{row.cells}}"
+          wx:for-item="cell"
+          wx:for-index="cellIndex"
+          wx:key="key"
+          class="ai-table-cell ai-table-align-{{cell.align}}"
+          style="{{cell.style}}"
+        >
+          <text class="ai-table-text">{{cell.value}}</text>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view wx:if="{{loading}}" class="ai-table-loading">
+    <view class="ai-table-spinner"></view>
+  </view>
+</view>

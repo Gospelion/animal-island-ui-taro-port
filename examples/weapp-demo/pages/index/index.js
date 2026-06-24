@@ -23,6 +23,18 @@ export default App;`,
     tasks: ['fruit'],
     tasksText: 'fruit',
     season: 'spring',
+    tableSelection: 'none',
+    tableColumns: [
+      { title: 'Villager', dataIndex: 'name', width: 170 },
+      { title: 'Island', dataIndex: 'island', width: 210 },
+      { title: 'Fruit', dataIndex: 'fruit', width: 150 },
+      { title: 'Bells', dataIndex: 'bells', width: 150, align: 'right' }
+    ],
+    tableRows: [
+      { key: '1', name: 'Molly', island: 'Maple Bay', fruit: 'Apple', bells: 1280 },
+      { key: '2', name: 'Roald', island: 'Snowcap', fruit: 'Orange', bells: 960 },
+      { key: '3', name: 'Fauna', island: 'Cedar Cove', fruit: 'Pear', bells: 1540 }
+    ],
     taskOptions: [
       { label: 'Fruit', value: 'fruit' },
       { label: 'Flowers', value: 'flowers' },
@@ -59,5 +71,8 @@ export default App;`,
   },
   handleSeasonChange(event) {
     this.setData({ season: event.detail.value });
+  },
+  handleTableRowTap(event) {
+    this.setData({ tableSelection: event.detail.record.name });
   }
 });

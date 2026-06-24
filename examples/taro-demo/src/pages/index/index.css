@@ -473,7 +473,7 @@ page {
 
 .section-title {
   color: #725d42;
-  font-size: 28rpx;
+  font-size: 18PX;
   font-weight: 900;
 }
 
@@ -504,7 +504,7 @@ page {
   display: block;
   margin-top: 28rpx;
   color: #9b7b55;
-  font-size: 24rpx;
+  font-size: 14PX;
 }
 
 .swatch-card {
@@ -576,6 +576,25 @@ page {
   font-size: 14PX;
   font-weight: 600;
   line-height: 1.7;
+}
+
+.table-demo-wrap {
+  margin-top: 28rpx;
+}
+
+.table-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-height: 44rpx;
+  padding: 4rpx 18rpx;
+  color: #0a8f82;
+  background: rgba(25, 200, 185, 0.14);
+  border-radius: 999rpx;
+  font-size: 14PX;
+  font-weight: 800;
+  line-height: 1.2;
 }
 
 .doc-main .ai-btn-small {
@@ -778,34 +797,11 @@ page {
 }
 
 .api-table {
-  overflow: hidden;
   margin-top: 48rpx;
-  border: 2rpx solid rgba(114, 93, 66, 0.14);
-  border-radius: 24rpx;
-  background: rgba(255, 253, 240, 0.78);
 }
 
-.api-row {
-  display: grid;
-  grid-template-columns: 1fr 1.45fr 1.45fr;
-  border-top: 2rpx solid rgba(114, 93, 66, 0.1);
-}
-
-.api-row:first-child {
-  border-top: 0;
-}
-
-.api-head {
-  background: rgba(183, 198, 229, 0.38);
-  font-weight: 900;
-}
-
-.api-row text {
-  min-width: 0;
-  padding: 24rpx;
-  color: #725d42;
-  font-size: 24rpx;
-  line-height: 1.4;
+.api-table .ai-table-text {
+  font-size: 14PX;
   overflow-wrap: anywhere;
 }
 
@@ -960,15 +956,6 @@ page {
 
   .doc-desc {
     font-size: 14PX;
-  }
-
-  .api-row {
-    grid-template-columns: 1fr;
-    padding: 12rpx 0;
-  }
-
-  .api-row text {
-    padding: 8rpx 18rpx;
   }
 
   .guide-line {

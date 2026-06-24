@@ -1,14 +1,18 @@
 .ai-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 28%;
-  border: 3rpx solid rgba(111, 79, 40, 0.14);
-  box-shadow: inset 0 -4rpx 0 rgba(111, 79, 40, 0.12);
+  display: inline-block;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.ai-icon::after {
+.ai-icon-fallback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 3rpx solid rgba(111, 79, 40, 0.14);
+  border-radius: 28%;
+  box-shadow: inset 0 -4rpx 0 rgba(111, 79, 40, 0.12);
+}
+
+.ai-icon-fallback::after {
   content: "";
   width: 42%;
   height: 42%;
@@ -27,6 +31,7 @@
 .ai-icon-icon-design { background: #9fd38a; }
 .ai-icon-icon-diy { background: #f5b36a; }
 .ai-icon-icon-helicopter { background: #ef8b7d; }
+.ai-icon-icon-leaf { background: #82d5bb; }
 .ai-icon-icon-map { background: #cdb5f8; }
 .ai-icon-icon-shopping { background: #f7b6c8; }
 .ai-icon-icon-variant { background: #b9dc75; }

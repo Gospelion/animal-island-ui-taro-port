@@ -6,6 +6,7 @@ export type AnimalIconName =
   | 'icon-design'
   | 'icon-diy'
   | 'icon-helicopter'
+  | 'icon-leaf'
   | 'icon-map'
   | 'icon-shopping'
   | 'icon-variant';
@@ -18,6 +19,7 @@ export const iconList = [
   { name: 'icon-design', label: 'Design' },
   { name: 'icon-diy', label: 'DIY' },
   { name: 'icon-helicopter', label: 'Helicopter' },
+  { name: 'icon-leaf', label: 'Leaf' },
   { name: 'icon-map', label: 'Map' },
   { name: 'icon-shopping', label: 'Shopping' },
   { name: 'icon-variant', label: 'Variant' }
@@ -31,6 +33,7 @@ export const iconColorMap: Record<AnimalIconName, string> = {
   'icon-design': '#9fd38a',
   'icon-diy': '#f5b36a',
   'icon-helicopter': '#ef8b7d',
+  'icon-leaf': '#82d5bb',
   'icon-map': '#cdb5f8',
   'icon-shopping': '#f7b6c8',
   'icon-variant': '#b9dc75'

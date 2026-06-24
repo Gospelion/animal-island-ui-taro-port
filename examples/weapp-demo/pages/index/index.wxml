@@ -48,6 +48,17 @@
     <text class="hint">Collapse: {{collapseStatus}}</text>
   </ai-card>
 
+  <ai-card color="brown" custom-class="section">
+    <text class="section-title">CodeBlock</text>
+    <view class="code-stack">
+      <ai-code-block code="{{codeBlockBasic}}"></ai-code-block>
+      <ai-code-block
+        code="{{codeBlockCustom}}"
+        custom-style="border-radius: 5px; background-color: #242c46ff;"
+      ></ai-code-block>
+    </view>
+  </ai-card>
+
   <ai-card color="warm-peach-pink" custom-class="section">
     <text class="section-title">Checkbox</text>
     <ai-checkbox options="{{taskOptions}}" value="{{tasks}}" bind:change="handleTasksChange"></ai-checkbox>

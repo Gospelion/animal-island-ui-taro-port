@@ -14,13 +14,14 @@
     "build:weapp-native": "npm run build -w @animal-island-ui/weapp",
     "build:all": "npm run build:core && npm run build:taro-ui && npm run build:weapp-native",
     "build:demo": "npm run build:core && npm run build:taro-ui && npm run build:h5 -w examples-taro-demo && node scripts/write-github-pages-demo.mjs",
+    "check:taro-css-units": "node scripts/check-taro-css-units.mjs",
     "check:weapp-structure": "node scripts/check-weapp-structure.mjs",
     "prepare:weapp-demo": "npm run build:weapp-native && node scripts/prepare-weapp-demo-npm.mjs",
     "typecheck": "npm run build:core && npm run typecheck -w @animal-island-ui/taro",
     "deploy": "npm run build:demo && gh-pages -d examples/taro-demo/dist",
     "demo:taro:h5": "npm run dev:h5 -w examples-taro-demo",
     "demo:taro:weapp": "npm run dev:weapp -w examples-taro-demo",
-    "test": "npm run check:weapp-structure"
+    "test": "npm run check:weapp-structure && npm run check:taro-css-units"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.24.0",

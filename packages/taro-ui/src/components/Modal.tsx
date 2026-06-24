@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View } from '@tarojs/components';
 import { Button } from './Button';
-import { cx } from './utils';
+import { cx, toSize } from './utils';
 import './styles.css';
 
 export interface ModalProps {
@@ -34,7 +34,7 @@ export const Modal: React.FC<ModalProps> = ({
   if (!open) return null;
 
   const modalStyle = {
-    width: typeof width === 'number' ? `${width}px` : width,
+    width: toSize(width),
     ...style
   } as React.CSSProperties;
 

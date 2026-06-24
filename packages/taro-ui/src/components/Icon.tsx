@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image, View } from '@tarojs/components';
 import { iconColorMap, iconList, type AnimalIconName } from '@animal-island-ui/core';
+import { iconDataUriMap } from './iconDataUris';
 import { cx, toSize } from './utils';
 import './styles.css';
 
@@ -19,16 +20,17 @@ export const ICON_LIST = iconList;
 
 export const Icon: React.FC<IconProps> = ({ name, src, size = 24, className, style, bounce = false }) => {
   const normalizedSize = toSize(size);
-  const cls = cx('ai-icon', name && `ai-icon-${name}`, bounce && 'ai-icon-bounce', className);
+  const assetSrc = src || (name ? iconDataUriMap[name] : undefined);
+  const cls = cx('ai-icon', !assetSrc && 'ai-icon-fallback', name && `ai-icon-${name}`, bounce && 'ai-icon-bounce', className);
   const mergedStyle = {
     width: normalizedSize,
     height: normalizedSize,
-    backgroundColor: name ? iconColorMap[name] : undefined,
+    backgroundColor: !assetSrc && name ? iconColorMap[name] : undefined,
     ...style
   } as React.CSSProperties;
 
-  if (src) {
-    return <Image className={cls} style={mergedStyle} src={src} mode="aspectFit" />;
+  if (assetSrc) {
+    return <Image className={cls} style={mergedStyle} src={assetSrc} mode="aspectFit" />;
   }
 
   return <View className={cls} style={mergedStyle} />;

@@ -14,7 +14,8 @@ const components = [
   'ai-radio',
   'ai-title',
   'ai-divider',
-  'ai-collapse'
+  'ai-collapse',
+  'ai-code-block'
 ];
 const required = ['index.wxml', 'index.wxss', 'index.js', 'index.json'];
 

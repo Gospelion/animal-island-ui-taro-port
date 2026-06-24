@@ -54,6 +54,19 @@ Page({
 
 When `expanded` is omitted, the component initializes from `default-expanded` and manages its own open state. When `expanded` is provided, the page should update it from `event.detail.expanded`.
 
+### `ai-code-block`
+
+`ai-code-block` uses the `code` property and highlights JSX / TS-like snippets with the same built-in regex rules as the upstream React component.
+
+```xml
+<ai-code-block
+  code="{{codeString}}"
+  custom-style="border-radius: 5px; background-color: #242c46ff;"
+></ai-code-block>
+```
+
+The native component follows Mini Program style hooks: use `custom-class` and `custom-style` instead of React `className` and `style`. It does not expose a `language` property or a copy action in Spike v0.
+
 ### Style override boundary
 
 `custom-class` and `custom-style` are intended for safe outer layout overrides, such as margins, width, display placement, or one-off panel styling. Internal class names and child layout are not treated as stable public API in Spike v0.

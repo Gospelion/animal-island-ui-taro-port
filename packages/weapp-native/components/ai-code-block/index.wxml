@@ -1,0 +1,11 @@
+<scroll-view scroll-x class="ai-code-block {{customClass}}" style="{{customStyle}}">
+  <view class="ai-code-block-inner">
+    <text
+      wx:for="{{tokens}}"
+      wx:key="key"
+      class="ai-code-block-token"
+      space="nbsp"
+      style="color: {{item.color}};"
+    >{{item.text}}</text>
+  </view>
+</scroll-view>

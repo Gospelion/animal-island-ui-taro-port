@@ -30,3 +30,6 @@ export type { DividerProps, DividerType } from './components/Divider';
 
 export { Collapse } from './components/Collapse';
 export type { CollapseProps } from './components/Collapse';
+
+export { CodeBlock } from './components/CodeBlock';
+export type { CodeBlockProps } from './components/CodeBlock';

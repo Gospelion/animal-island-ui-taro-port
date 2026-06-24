@@ -4,9 +4,11 @@ import {
   Button,
   Card,
   Checkbox,
+  CodeBlock,
   Collapse,
   Divider,
   Icon,
+  ICON_LIST,
   Input,
   Modal,
   Radio,
@@ -16,7 +18,7 @@ import {
 } from '@animal-island-ui/taro';
 import './index.css';
 
-type PageKey = 'home' | 'title' | 'button' | 'input' | 'switch' | 'card' | 'modal' | 'divider' | 'icon' | 'checkbox' | 'radio' | 'collapse';
+type PageKey = 'home' | 'title' | 'button' | 'input' | 'switch' | 'card' | 'modal' | 'divider' | 'icon' | 'checkbox' | 'radio' | 'collapse' | 'codeblock';
 
 const pageInfo: Record<PageKey, { title: string; desc: string; badge: string }> = {
   home: { title: 'Animal Island UI', desc: 'Animal 风格的 Taro 组件展示页，复刻原仓库 demo 的首页、侧边导航和组件文档逻辑。', badge: 'Taro' },
@@ -30,7 +32,8 @@ const pageInfo: Record<PageKey, { title: string; desc: string; badge: string }> 
   icon: { title: 'Icon 图标', desc: '岛屿主题图标，支持尺寸和弹跳动效。', badge: 'icons' },
   checkbox: { title: 'Checkbox 多选框', desc: '支持受控 / 非受控、方向、尺寸和禁用选项。', badge: 'controlled' },
   radio: { title: 'Radio 单选框', desc: '支持受控 / 非受控、方向、尺寸和禁用选项。', badge: 'controlled' },
-  collapse: { title: 'Collapse 折叠面板', desc: 'FAQ 风格的状态型折叠面板，支持受控、默认展开和禁用状态。', badge: 'stateful' }
+  collapse: { title: 'Collapse 折叠面板', desc: 'FAQ 风格的状态型折叠面板，支持受控、默认展开和禁用状态。', badge: 'stateful' },
+  codeblock: { title: 'CodeBlock 代码高亮', desc: 'Dark JSX / TS code block with original regex highlighting, 14px font size, and 600 font weight.', badge: 'JSX/TS' }
 };
 
 const menu = [
@@ -47,7 +50,8 @@ const menu = [
       ['icon', 'Icon 图标'],
       ['checkbox', 'Checkbox 多选框'],
       ['radio', 'Radio 单选框'],
-      ['collapse', 'Collapse 折叠面板', true]
+      ['collapse', 'Collapse 折叠面板', true],
+      ['codeblock', 'CodeBlock 代码高亮', true]
     ]
   },
   {
@@ -70,11 +74,7 @@ function titleColor(key: PageKey): TitleColor {
 }
 
 function Code({ children }: { children: string }) {
-  return (
-    <View className="code-box">
-      <Text className="code-text">{children}</Text>
-    </View>
-  );
+  return <CodeBlock code={children} className="demo-code-block" />;
 }
 
 function Api({ rows }: { rows: string[][] }) {
@@ -261,8 +261,7 @@ function DividerDemo() {
 }
 
 function IconDemo() {
-  const icons = ['icon-miles', 'icon-camera', 'icon-shopping', 'icon-map', 'icon-leaf', 'icon-diy'] as const;
-  return <><Section title="图标列表" badge="bounce"><View className="icon-grid">{icons.map((name) => <View key={name} className="icon-cell"><Icon name={name} size="70rpx" bounce /><Text>{name.replace('icon-', '')}</Text></View>)}</View></Section><Code>{'<Icon name="icon-camera" size="70rpx" bounce />'}</Code><Api rows={[['name', '图标名称', 'IconName'], ['bounce', '弹跳动效', 'boolean']]} /></>;
+  return <><Section title="图标列表" badge="bounce"><View className="icon-grid">{ICON_LIST.map((icon) => <View key={icon.name} className="icon-cell"><Icon name={icon.name} size="70rpx" bounce /><Text>{icon.label}</Text></View>)}</View></Section><Code>{'<Icon name="icon-camera" size="70rpx" bounce />'}</Code><Api rows={[['name', '图标名称', 'IconName'], ['bounce', '弹跳动效', 'boolean']]} /></>;
 }
 
 function TitleDemo() {
@@ -312,8 +311,73 @@ function CollapseDemo() {
   );
 }
 
+function CodeBlockDemo() {
+  const basicCode = `import React from 'react';
+import { Button } from 'animal-island-ui';
+
+const App = () => (
+    <Button type="primary">按钮</Button>
+);
+
+export default App;`;
+
+  const customCode = `import React from 'react';
+import { CodeBlock } from 'animal-island-ui';
+
+<CodeBlock
+    code={codeString}
+    style={{ borderRadius: 5, backgroundColor: '#242c46ff' }}
+    className="custom-code"
+/>`;
+
+  const usageCode = `import React from 'react';
+import { CodeBlock } from 'animal-island-ui';
+
+const App = () => {
+    return (
+        <div>
+            {/* 基础用法 */}
+            <CodeBlock code={codeString} />
+
+            {/* 自定义样式 */}
+            <CodeBlock
+                code={codeString}
+                style={{ borderRadius: 5, backgroundColor: '#242c46ff' }}
+                className="custom-code"
+            />
+        </div>
+    );
+};
+
+export default App;`;
+
+  return (
+    <>
+      <Section title="基础用法" badge="代码高亮">
+        <View className="demo-box">
+          <CodeBlock code={basicCode} />
+        </View>
+      </Section>
+      <Section title="自定义样式">
+        <View className="demo-box">
+          <CodeBlock
+            code={customCode}
+            style={{ borderRadius: '5PX', backgroundColor: '#242c46ff' }}
+            className="custom-code"
+          />
+        </View>
+      </Section>
+      <View className="usage-block">
+        <Text className="usage-label">使用示例</Text>
+        <CodeBlock code={usageCode} style={{ borderRadius: '0 20PX 20PX 20PX' }} />
+      </View>
+      <Api rows={[['code', '代码字符串，必填', 'string'], ['style', '自定义样式', 'CSSProperties'], ['className', '自定义类名', 'string']]} />
+    </>
+  );
+}
+
 function ComponentPage({ active }: { active: PageKey }) {
-  const Demo = useMemo(() => ({ title: TitleDemo, button: ButtonDemo, input: InputDemo, switch: SwitchDemo, card: CardDemo, modal: ModalDemo, divider: DividerDemo, icon: IconDemo, checkbox: CheckboxDemo, radio: RadioDemo, collapse: CollapseDemo, home: () => null })[active], [active]);
+  const Demo = useMemo(() => ({ title: TitleDemo, button: ButtonDemo, input: InputDemo, switch: SwitchDemo, card: CardDemo, modal: ModalDemo, divider: DividerDemo, icon: IconDemo, checkbox: CheckboxDemo, radio: RadioDemo, collapse: CollapseDemo, codeblock: CodeBlockDemo, home: () => null })[active], [active]);
   return (
     <ScrollView scrollY className="component-scroll">
       <View className="component-doc">

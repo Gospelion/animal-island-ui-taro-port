@@ -1,12 +1,12 @@
 <image
-  wx:if="{{src}}"
-  class="ai-icon ai-icon-img {{bounce ? 'ai-icon-bounce' : ''}} {{customClass}}"
+  wx:if="{{resolvedSrc}}"
+  class="ai-icon ai-icon-img ai-icon-{{name}} {{bounce ? 'ai-icon-bounce' : ''}} {{customClass}}"
   style="width: {{size}}; height: {{size}}; {{customStyle}}"
-  src="{{src}}"
+  src="{{resolvedSrc}}"
   mode="aspectFit"
 />
 <view
   wx:else
-  class="ai-icon ai-icon-{{name}} {{bounce ? 'ai-icon-bounce' : ''}} {{customClass}}"
+  class="ai-icon ai-icon-fallback ai-icon-{{name}} {{bounce ? 'ai-icon-bounce' : ''}} {{customClass}}"
   style="width: {{size}}; height: {{size}}; {{customStyle}}"
 ></view>

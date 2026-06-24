@@ -36,12 +36,13 @@ Spike v0 已验证 5 个代表组件：
 - `Title`
 - `Divider`
 - `Collapse`
+- `CodeBlock`
 
 以下组件暂不进入当前批次：
 
 - `Select`：需要单独比较原生 `picker` 与自绘弹层方案。
 - `Loading`：后续会定义为“小程序专用轻动画组件”，不承诺复刻 Web 版 GSAP/MotionPath 动效。
-- `Table`、`CodeBlock`、`Tooltip`、`Form`：暂不迁移。
+- `Table`、`Tooltip`、`Form`：暂不迁移。
 
 ## API 原则
 
@@ -49,6 +50,7 @@ Spike v0 已验证 5 个代表组件：
 
 - Taro 线使用 React 习惯：`children`、`onClick`、`className`、`style`。
 - 微信原生线使用小程序习惯：`slot`、`bind:tap`、`custom-class`、`custom-style`。
+- Taro CSS 中使用 `rpx` 表示需要参与跨端缩放的尺寸；需要保留真实 CSS 像素时使用大写 `PX`，避免 H5 构建被 `pxtransform` 转成 `rem`。
 
 Spike v0 中有几个刻意保留的平台差异：
 
@@ -62,6 +64,8 @@ Spike v0 中有几个刻意保留的平台差异：
 - 微信原生 `ai-switch` 使用 `checked` 属性与 `bind:change`，变化值位于 `event.detail.checked`。
 - Taro `Collapse` 使用 `question` 和 `children`，支持 `expanded` / `defaultExpanded`，`onChange` 接收下一个展开值。
 - 微信原生 `ai-collapse` 使用 `question` 属性与默认 slot，变化值位于 `event.detail.expanded`。
+- Taro `CodeBlock` 与上游保持一致，使用 `code`、`style`、`className`，仅支持 JSX / TS 风格的内置高亮。
+- 微信原生 `ai-code-block` 使用 `code`、`custom-class`、`custom-style`，不提供 `language` 或复制按钮。
 
 ## 目录结构
 

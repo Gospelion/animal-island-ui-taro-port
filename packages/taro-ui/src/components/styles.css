@@ -216,13 +216,16 @@ page {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 28%;
-  border: 3rpx solid rgba(111, 79, 40, 0.14);
-  box-shadow: inset 0 -4rpx 0 rgba(111, 79, 40, 0.12);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.ai-icon::after {
+.ai-icon-fallback {
+  border: 3rpx solid rgba(111, 79, 40, 0.14);
+  border-radius: 28%;
+  box-shadow: inset 0 -4rpx 0 rgba(111, 79, 40, 0.12);
+}
+
+.ai-icon-fallback::after {
   content: "";
   width: 42%;
   height: 42%;
@@ -881,6 +884,50 @@ page {
 
 .ai-collapse-expanded .ai-collapse-content {
   padding-bottom: 32rpx;
+}
+
+.ai-code-block {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 20PX 24PX;
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  color: #e8d5bc;
+  background: #2b2118;
+  border: 1PX solid #3d3028;
+  border-radius: 20PX;
+  font-family: "SF Mono", "Fira Code", "Cascadia Code", Consolas, monospace;
+  font-size: 14PX;
+  font-weight: 600;
+  line-height: 1.7;
+  white-space: pre;
+  tab-size: 4;
+}
+
+.ai-code-block::-webkit-scrollbar,
+.ai-code-block *::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+.ai-code-block-inner {
+  display: inline;
+  min-width: max-content;
+  color: #e8d5bc;
+  font-family: "SF Mono", "Fira Code", "Cascadia Code", Consolas, monospace;
+  font-size: 14PX;
+  font-weight: 600;
+  line-height: 1.7;
+  white-space: pre;
+  tab-size: 4;
+}
+
+.ai-code-block-token {
+  display: inline;
+  font: inherit;
+  white-space: pre;
 }
 
 @keyframes ai-btn-loading {

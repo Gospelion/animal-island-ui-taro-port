@@ -63,6 +63,12 @@
   gap: 20rpx;
 }
 
+.code-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
 .demo-divider {
   display: block;
   margin-top: 18rpx;

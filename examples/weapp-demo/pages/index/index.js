@@ -5,6 +5,21 @@ Page({
     quietHours: true,
     collapseOpen: true,
     collapseStatus: 'open',
+    codeBlockBasic: `import React from 'react';
+import { Button } from 'animal-island-ui';
+
+const App = () => (
+    <Button type="primary">Button</Button>
+);
+
+export default App;`,
+    codeBlockCustom: `import { CodeBlock } from 'animal-island-ui';
+
+<CodeBlock
+    code={codeString}
+    style={{ borderRadius: 5, backgroundColor: '#242c46ff' }}
+    className="custom-code"
+/>`,
     tasks: ['fruit'],
     tasksText: 'fruit',
     season: 'spring',

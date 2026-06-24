@@ -17,3 +17,13 @@
 
 - The upstream React Table uses native `<table>/<tr>/<th>/<td>` layout. The Taro port uses `View` nodes, but H5 CSS should preserve table semantics with `display: table`, `display: table-row`, and `display: table-cell`; do not convert it back to flex rows for H5.
 - Keep normal cell text directly in the table-cell flow. Avoid making `.ai-table-text` a block/flex layout wrapper, because that reintroduces baseline and vertical alignment drift between Chinese and Latin cells.
+
+## Typewriter migration
+
+- The upstream `Typewriter` intentionally emits no wrapper element. Keep the Taro component as a `Fragment` render that truncates/clones the existing ReactNode tree, so parent text/layout styles continue to come from the caller.
+- `Typewriter` is currently migrated only for `packages/taro-ui`; do not document or count a WeChat native `ai-typewriter` until that separate implementation exists.
+
+## Divider migration
+
+- `Divider` must expose all 9 upstream variants in demos: `line-*`, `wave-yellow`, and `dashed-*`, including the white variants on a dark preview background.
+- In `packages/taro-ui`, `line-*` dividers should render the upstream-style repeated triangle decoration, `wave-yellow` should render a continuous wave stroke, and `dashed-*` should stay as thin dashed rules; do not regress these to solid rectangles or dotted circles.

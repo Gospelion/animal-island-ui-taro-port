@@ -36,3 +36,6 @@ export type { CodeBlockProps } from './components/CodeBlock';
 
 export { Table } from './components/Table';
 export type { TableAlign, TableColumn, TableProps, TableRowKey, TableScroll } from './components/Table';
+
+export { Typewriter } from './components/Typewriter';
+export type { TypewriterProps } from './components/Typewriter';

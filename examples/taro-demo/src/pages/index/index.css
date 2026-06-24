@@ -513,18 +513,49 @@ page {
 
 .divider-list,
 .divider-demo-item {
-  display: flex;
-  flex-direction: column;
+  display: grid;
 }
 
 .divider-list {
-  gap: 48rpx;
+  gap: 42rpx;
 }
 
 .divider-demo-item {
-  gap: 16rpx;
+  grid-template-columns: minmax(220rpx, 280rpx) minmax(0, 1fr);
+  align-items: center;
+  gap: 32rpx;
   color: #8a6d4f;
-  font-size: 46rpx;
+}
+
+.divider-demo-label {
+  color: #9b7b55;
+  font-size: 14PX;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.divider-preview {
+  box-sizing: border-box;
+  min-width: 0;
+  padding: 8rpx 0;
+}
+
+.divider-preview .ai-divider-line-brown,
+.divider-preview .ai-divider-line-teal,
+.divider-preview .ai-divider-line-yellow,
+.divider-preview .ai-divider-wave-yellow {
+  width: min(460rpx, 68%);
+  margin: 0 auto;
+}
+
+.divider-preview-dark {
+  padding: 14rpx 24rpx;
+  background: #333;
+}
+
+.divider-preview-dark .ai-divider {
+  width: min(680rpx, 100%);
+  margin: 0 auto;
 }
 
 .icon-cell {
@@ -956,6 +987,18 @@ page {
 
   .doc-desc {
     font-size: 14PX;
+  }
+
+  .divider-demo-item {
+    grid-template-columns: 1fr;
+    gap: 12rpx;
+  }
+
+  .divider-preview .ai-divider-line-brown,
+  .divider-preview .ai-divider-line-teal,
+  .divider-preview .ai-divider-line-yellow,
+  .divider-preview .ai-divider-wave-yellow {
+    width: 100%;
   }
 
   .guide-line {

@@ -718,56 +718,104 @@ page {
 .ai-title-warm-peach-pink { --ai-title-front: #e18c6f; --ai-title-back: #b85a30; --ai-title-fold: #6a2a10; --ai-title-text: #fff; }
 
 .ai-divider {
+  --ai-divider-color: #c4b89e;
   width: 100%;
   height: 24rpx;
-  background-repeat: repeat-x;
-  background-position: center;
-  background-size: auto 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.ai-divider::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background-color: var(--ai-divider-color);
+  mask-repeat: repeat-x;
+  mask-position: center;
+  mask-size: 34rpx 18rpx;
+  -webkit-mask-repeat: repeat-x;
+  -webkit-mask-position: center;
+  -webkit-mask-size: 34rpx 18rpx;
+}
+
+.ai-divider-line-brown,
+.ai-divider-line-teal,
+.ai-divider-line-white,
+.ai-divider-line-yellow {
+  height: 28rpx;
 }
 
 .ai-divider-line-brown {
-  background-image: linear-gradient(90deg, transparent 0 6rpx, #c4b89e 6rpx 34rpx, transparent 34rpx 46rpx);
+  --ai-divider-color: #cfc6b6;
 }
 
 .ai-divider-line-teal {
-  background-image: linear-gradient(90deg, transparent 0 6rpx, var(--ai-primary) 6rpx 34rpx, transparent 34rpx 46rpx);
+  --ai-divider-color: #008a85;
 }
 
 .ai-divider-line-white {
-  background-image: linear-gradient(90deg, transparent 0 6rpx, rgba(255, 255, 255, 0.9) 6rpx 34rpx, transparent 34rpx 46rpx);
+  --ai-divider-color: rgba(255, 255, 255, 0.94);
 }
 
 .ai-divider-line-yellow {
-  background-image: linear-gradient(90deg, transparent 0 6rpx, #f5d04a 6rpx 34rpx, transparent 34rpx 46rpx);
+  --ai-divider-color: #f0d957;
+}
+
+.ai-divider-line-brown::before,
+.ai-divider-line-teal::before,
+.ai-divider-line-white::before,
+.ai-divider-line-yellow::before {
+  mask-image: url("data:image/svg+xml,%3Csvg width='34' height='18' viewBox='0 0 34 18' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 5.5 9 9 1 12.5zM14 4l8 10H6zM22 5.5l8 3.5-8 3.5z' fill='%23000'/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='34' height='18' viewBox='0 0 34 18' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 5.5 9 9 1 12.5zM14 4l8 10H6zM22 5.5l8 3.5-8 3.5z' fill='%23000'/%3E%3C/svg%3E");
 }
 
 .ai-divider-wave-yellow {
-  background-image: radial-gradient(circle at 12rpx 12rpx, transparent 0 8rpx, #f5d04a 9rpx 11rpx, transparent 12rpx);
-  background-size: 28rpx 24rpx;
+  height: 28rpx;
+}
+
+.ai-divider-wave-yellow::before {
+  background-color: #f0d957;
+  mask-image: url("data:image/svg+xml,%3Csvg width='42' height='18' viewBox='0 0 42 18' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 9c5.25 0 5.25-6 10.5-6S15.75 9 21 9s5.25-6 10.5-6S36.75 9 42 9' fill='none' stroke='%23000' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");
+  mask-size: 42rpx 18rpx;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='42' height='18' viewBox='0 0 42 18' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 9c5.25 0 5.25-6 10.5-6S15.75 9 21 9s5.25-6 10.5-6S36.75 9 42 9' fill='none' stroke='%23000' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");
+  -webkit-mask-size: 42rpx 18rpx;
 }
 
 .ai-divider-dashed-brown,
 .ai-divider-dashed-teal,
 .ai-divider-dashed-white,
 .ai-divider-dashed-yellow {
-  height: 16rpx;
-  background-size: 24rpx 4rpx;
+  height: 18rpx;
+}
+
+.ai-divider-dashed-brown::before,
+.ai-divider-dashed-teal::before,
+.ai-divider-dashed-white::before,
+.ai-divider-dashed-yellow::before {
+  height: 2rpx;
+  top: 50%;
+  bottom: auto;
+  background-color: transparent;
+  background-image: repeating-linear-gradient(90deg, var(--ai-divider-color) 0 8rpx, transparent 8rpx 18rpx);
+  mask-image: none;
+  -webkit-mask-image: none;
+  transform: translateY(-50%);
 }
 
 .ai-divider-dashed-brown {
-  background-image: linear-gradient(90deg, #c4b89e 50%, transparent 50%);
+  --ai-divider-color: #c4b89e;
 }
 
 .ai-divider-dashed-teal {
-  background-image: linear-gradient(90deg, var(--ai-primary) 50%, transparent 50%);
+  --ai-divider-color: #19c8b9;
 }
 
 .ai-divider-dashed-white {
-  background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.9) 50%, transparent 50%);
+  --ai-divider-color: rgba(255, 255, 255, 0.94);
 }
 
 .ai-divider-dashed-yellow {
-  background-image: linear-gradient(90deg, #f5d04a 50%, transparent 50%);
+  --ai-divider-color: #f5d04a;
 }
 
 .ai-collapse {

@@ -39,6 +39,10 @@ Spike v0 已验证 5 个代表组件：
 - `CodeBlock`
 - `Table`
 
+Taro 线额外已完成：
+
+- `Typewriter`
+
 以下组件暂不进入当前批次：
 
 - `Select`：需要单独比较原生 `picker` 与自绘弹层方案。
@@ -69,6 +73,7 @@ Spike v0 中有几个刻意保留的平台差异：
 - 微信原生 `ai-code-block` 使用 `code`、`custom-class`、`custom-style`，不提供 `language` 或复制按钮。
 - Taro `Table` 使用 `ScrollView + View` 栅格实现，支持 `columns`、`dataSource`、`rowKey`、`striped`、`showHeader`、`loading`、`emptyText`、`scroll`、`column.render` 和 `onRowClick`。
 - 微信原生 `ai-table` 使用 `columns`、`data-source`、`row-key`、`striped`、`show-header`、`loading`、`empty-text`、`scroll-x`、`scroll-y`；`bind:rowtap` 的变化值位于 `event.detail`，原生 v1 不支持函数式单元格 `render`。
+- Taro `Typewriter` 与上游保持一致，不输出额外包裹节点，支持 `children`、`speed`、`trigger`、`autoPlay` 和 `onDone`；当前未提供微信原生版本。
 
 ## 目录结构
 

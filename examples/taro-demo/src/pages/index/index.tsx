@@ -14,13 +14,15 @@ import {
   Radio,
   Switch,
   Table,
+  Typewriter,
   Title,
+  type DividerType,
   type TableColumn,
   type TitleColor
 } from '@animal-island-ui/taro';
 import './index.css';
 
-type PageKey = 'home' | 'title' | 'button' | 'input' | 'switch' | 'card' | 'modal' | 'divider' | 'icon' | 'checkbox' | 'radio' | 'collapse' | 'codeblock' | 'table';
+type PageKey = 'home' | 'title' | 'button' | 'input' | 'switch' | 'card' | 'modal' | 'divider' | 'icon' | 'checkbox' | 'radio' | 'collapse' | 'codeblock' | 'table' | 'typewriter';
 
 const pageInfo: Record<PageKey, { title: string; desc: string; badge: string }> = {
   home: { title: 'Animal Island UI', desc: 'Animal 风格的 Taro 组件展示页，复刻原仓库 demo 的首页、侧边导航和组件文档逻辑。', badge: 'Taro' },
@@ -35,8 +37,9 @@ const pageInfo: Record<PageKey, { title: string; desc: string; badge: string }> 
   checkbox: { title: 'Checkbox 多选框', desc: '支持受控 / 非受控、方向、尺寸和禁用选项。', badge: 'controlled' },
   radio: { title: 'Radio 单选框', desc: '支持受控 / 非受控、方向、尺寸和禁用选项。', badge: 'controlled' },
   collapse: { title: 'Collapse 折叠面板', desc: 'FAQ 风格的状态型折叠面板，支持受控、默认展开和禁用状态。', badge: 'stateful' },
-  codeblock: { title: 'CodeBlock 代码高亮', desc: 'Dark JSX / TS code block with original regex highlighting, 14px font size, and 600 font weight.', badge: 'JSX/TS' },
-  table: { title: 'Table 表格', desc: 'ScrollView + View data grid with striped rows, loading, empty state, and horizontal scrolling.', badge: 'grid' }
+  codeblock: { title: 'CodeBlock 代码高亮', desc: '深色 JSX / TS 代码块，沿用上游正则高亮逻辑，并固定 14PX 字号与 600 字重。', badge: 'JSX/TS' },
+  table: { title: 'Table 表格', desc: '基于 ScrollView + View 的数据表格，支持斑马纹、加载态、空状态和横向滚动。', badge: '表格' },
+  typewriter: { title: 'Typewriter 打字机', desc: '保留原有 ReactNode 结构，并按字符逐步显示文本内容。', badge: '90ms' }
 };
 
 const menu = [
@@ -55,13 +58,13 @@ const menu = [
       ['radio', 'Radio 单选框'],
       ['collapse', 'Collapse 折叠面板', true],
       ['codeblock', 'CodeBlock 代码高亮', true],
-      ['table', 'Table 表格', true]
+      ['table', 'Table 表格', true],
+      ['typewriter', 'Typewriter 打字机', true]
     ]
   },
   {
     title: '-- 待移植组件 --',
     children: [
-      ['typewriter', 'Typewriter 打字机', false, true],
       ['select', 'Select 选择器', false, true],
       ['tabs', 'Tabs 标签页', false, true],
       ['loading', 'Loading 加载', true, true],
@@ -272,8 +275,18 @@ function ModalDemo() {
 }
 
 function DividerDemo() {
-  const types = ['line-brown', 'line-teal', 'line-yellow', 'wave-yellow', 'dashed-brown', 'dashed-teal', 'dashed-yellow'] as const;
-  return <><Section title="分割线类型" badge="decorative"><View className="divider-list">{types.map((type) => <View key={type} className="divider-demo-item"><Text>{type}</Text><Divider type={type} /></View>)}</View></Section><Code>{'<Divider type="wave-yellow" />'}</Code><Api rows={[['type', '分割线类型', 'DividerType']]} /></>;
+  const items: Array<{ type: DividerType; label: string; dark?: boolean }> = [
+    { type: 'line-brown', label: 'line-brown（实线棕色）' },
+    { type: 'line-teal', label: 'line-teal（实线青色）' },
+    { type: 'line-white', label: 'line-white（实线白色）', dark: true },
+    { type: 'line-yellow', label: 'line-yellow（实线黄色）' },
+    { type: 'wave-yellow', label: 'wave-yellow（波浪线黄色）' },
+    { type: 'dashed-brown', label: 'dashed-brown（虚线棕色）' },
+    { type: 'dashed-teal', label: 'dashed-teal（虚线青色）' },
+    { type: 'dashed-white', label: 'dashed-white（虚线白色）', dark: true },
+    { type: 'dashed-yellow', label: 'dashed-yellow（虚线黄色）' }
+  ];
+  return <><Section title="Divider" badge="9 types"><View className="divider-list">{items.map(({ type, label, dark }) => <View key={type} className="divider-demo-item"><Text className="divider-demo-label">{label}</Text><View className={`divider-preview ${dark ? 'divider-preview-dark' : ''}`}><Divider type={type} /></View></View>)}</View></Section><Code>{'<Divider type="wave-yellow" />'}</Code><Api rows={[['type', '分割线类型', 'DividerType']]} /></>;
 }
 
 function IconDemo() {
@@ -404,26 +417,26 @@ interface TableDemoRow extends Record<string, unknown> {
 function TableDemo() {
   const [striped, setStriped] = useState(true);
   const [loading, setLoading] = useState(false);
-  const [selected, setSelected] = useState('none');
+  const [selected, setSelected] = useState('未选择');
 
   const rows: TableDemoRow[] = [
-    { key: '1', name: 'Molly', island: 'Maple Bay', fruit: 'Apple', hobby: 'Music', bells: 1280 },
-    { key: '2', name: 'Roald', island: 'Snowcap', fruit: 'Orange', hobby: 'Sport', bells: 960 },
-    { key: '3', name: 'Fauna', island: 'Cedar Cove', fruit: 'Pear', hobby: 'Reading', bells: 1540 },
-    { key: '4', name: 'Ketchup', island: 'Sunny Dune', fruit: 'Peach', hobby: 'Picnic', bells: 1120 }
+    { key: '1', name: '茉莉', island: '枫糖湾', fruit: '苹果', hobby: '音乐', bells: 1280 },
+    { key: '2', name: '寒冰', island: '雪帽岛', fruit: '橘子', hobby: '运动', bells: 960 },
+    { key: '3', name: '小鹿', island: '杉木湾', fruit: '梨子', hobby: '阅读', bells: 1540 },
+    { key: '4', name: '番茄', island: '晴沙岛', fruit: '桃子', hobby: '野餐', bells: 1120 }
   ];
 
   const columns: TableColumn<TableDemoRow>[] = [
-    { title: 'Villager', dataIndex: 'name', width: 170 },
-    { title: 'Island', dataIndex: 'island', width: 210 },
-    { title: 'Fruit', dataIndex: 'fruit', width: 150 },
+    { title: '居民', dataIndex: 'name', width: 170 },
+    { title: '岛屿', dataIndex: 'island', width: 210 },
+    { title: '水果', dataIndex: 'fruit', width: 150 },
     {
-      title: 'Hobby',
+      title: '爱好',
       dataIndex: 'hobby',
       width: 160,
       render: (value) => <Text className="table-tag">{String(value)}</Text>
     },
-    { title: 'Bells', dataIndex: 'bells', width: 150, align: 'right' }
+    { title: '铃钱', dataIndex: 'bells', width: 150, align: 'right' }
   ];
 
   const handleLoading = () => {
@@ -433,13 +446,13 @@ function TableDemo() {
 
   return (
     <>
-      <Section title="Basic grid" badge={striped ? 'striped' : 'plain'}>
+      <Section title="基础表格" badge={striped ? '斑马纹' : '普通'}>
         <View className="demo-row">
           <Button type={striped ? 'primary' : 'dashed'} onClick={() => setStriped((value) => !value)}>
-            Toggle striped
+            切换斑马纹
           </Button>
           <Button type="primary" loading={loading} disabled={loading} onClick={handleLoading}>
-            Simulate loading
+            模拟加载
           </Button>
         </View>
         <View className="table-demo-wrap">
@@ -452,24 +465,64 @@ function TableDemo() {
             onRowClick={(record) => setSelected(record.name)}
           />
         </View>
-        <Text className="hint">Selected row: {selected}</Text>
+        <Text className="hint">当前选中：{selected}</Text>
       </Section>
 
-      <Section title="Empty and headerless states">
+      <Section title="空状态和无表头">
         <View className="demo-col">
-          <Table columns={columns.slice(0, 3)} dataSource={[]} emptyText="No island records yet" />
+          <Table columns={columns.slice(0, 3)} dataSource={[]} emptyText="暂无岛屿记录" />
           <Table columns={columns.slice(0, 3)} dataSource={rows.slice(0, 2)} showHeader={false} striped={false} />
         </View>
       </Section>
 
       <Code>{"import { Table } from '@animal-island-ui/taro';\n<Table columns={columns} dataSource={rows} scroll={{ x: 840 }} />"}</Code>
-      <Api rows={[['columns', 'Column configuration', 'TableColumn[]'], ['dataSource', 'Row data', 'Record<string, unknown>[]'], ['scroll', 'Horizontal / vertical scroll size', '{ x?: number | string; y?: number | string }'], ['onRowClick', 'Row click callback', '(record, index) => void']]} />
+      <Api rows={[['columns', '列配置', 'TableColumn[]'], ['dataSource', '行数据', 'Record<string, unknown>[]'], ['scroll', '横向 / 纵向滚动尺寸', '{ x?: number | string; y?: number | string }'], ['onRowClick', '行点击回调', '(record, index) => void']]} />
+    </>
+  );
+}
+
+function TypewriterDemo() {
+  const [replayKey, setReplayKey] = useState(0);
+  const [doneCount, setDoneCount] = useState(0);
+
+  return (
+    <>
+      <Section title="基础播放" badge={`完成 ${doneCount}`}>
+        <View className="demo-col">
+          <Text className="hint">
+            <Typewriter trigger={replayKey} onDone={() => setDoneCount((value) => value + 1)}>
+              你好，欢迎来到动物岛！今天的公告牌已经准备好了，可以写下新的岛民笔记。
+            </Typewriter>
+          </Text>
+          <Button type="primary" onClick={() => setReplayKey((value) => value + 1)}>
+            重新播放
+          </Button>
+        </View>
+      </Section>
+
+      <Section title="嵌套内容">
+        <View className="demo-col">
+          <Text className="hint">
+            <Typewriter speed={40} trigger={replayKey}>
+              保留外层句子、<Text className="table-tag">带样式片段</Text>，以及内联 Taro Text 节点的结构。
+            </Typewriter>
+          </Text>
+          <Text className="hint">
+            <Typewriter autoPlay={false}>
+              autoPlay=false 会立即显示全部内容，适合静态文本或服务端返回的内容。
+            </Typewriter>
+          </Text>
+        </View>
+      </Section>
+
+      <Code>{"import { Typewriter } from '@animal-island-ui/taro';\n<Typewriter speed={60} trigger={replayKey} onDone={handleDone}>你好，动物岛</Typewriter>"}</Code>
+      <Api rows={[['speed', '字符之间的播放间隔，单位毫秒', 'number'], ['trigger', '外部重播标记；变化后重新播放', 'unknown'], ['autoPlay', '是否从头播放动画', 'boolean'], ['onDone', '播放完成后触发一次', '() => void']]} />
     </>
   );
 }
 
 function ComponentPage({ active }: { active: PageKey }) {
-  const Demo = useMemo(() => ({ title: TitleDemo, button: ButtonDemo, input: InputDemo, switch: SwitchDemo, card: CardDemo, modal: ModalDemo, divider: DividerDemo, icon: IconDemo, checkbox: CheckboxDemo, radio: RadioDemo, collapse: CollapseDemo, codeblock: CodeBlockDemo, table: TableDemo, home: () => null })[active], [active]);
+  const Demo = useMemo(() => ({ title: TitleDemo, button: ButtonDemo, input: InputDemo, switch: SwitchDemo, card: CardDemo, modal: ModalDemo, divider: DividerDemo, icon: IconDemo, checkbox: CheckboxDemo, radio: RadioDemo, collapse: CollapseDemo, codeblock: CodeBlockDemo, table: TableDemo, typewriter: TypewriterDemo, home: () => null })[active], [active]);
   return (
     <ScrollView scrollY className="component-scroll">
       <View className="component-doc">

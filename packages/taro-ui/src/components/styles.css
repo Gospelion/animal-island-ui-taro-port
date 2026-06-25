@@ -245,13 +245,13 @@ page {
 .ai-input-wrap {
   display: flex;
   align-items: center;
-  gap: 12rpx;
+  gap: 0;
   box-sizing: border-box;
   color: var(--ai-text);
-  background: var(--ai-paper);
-  border: 4rpx solid var(--ai-border);
+  background: #f7f3df;
+  border: 4rpx solid #c4b89e;
   border-radius: 999rpx;
-  box-shadow: 0 8rpx 18rpx var(--ai-shadow);
+  box-shadow: 0 6rpx 0 0 #d4c9b4;
   font-family: var(--ai-font);
   transition: border-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
 }
@@ -259,69 +259,178 @@ page {
 .ai-input-wrap:hover,
 .ai-input-wrap:focus-within {
   border-color: #a89878;
-  box-shadow: 0 8rpx 0 rgba(196, 184, 158, 0.72);
+  box-shadow: 0 6rpx 0 0 #c4b89e;
 }
 
 .ai-input-small {
   min-height: 64rpx;
-  padding: 0 20rpx;
+  padding: 0 28rpx;
+  font-size: 24rpx;
+  border-radius: 80rpx;
+}
+
+.ai-input-small:not(.ai-input-no-shadow) {
+  box-shadow: 0 4rpx 0 0 #d4c9b4;
 }
 
 .ai-input-middle {
-  min-height: 84rpx;
-  padding: 0 28rpx;
+  min-height: 80rpx;
+  padding: 0 36rpx;
+  font-size: 28rpx;
 }
 
 .ai-input-large {
-  min-height: 100rpx;
-  padding: 0 34rpx;
+  min-height: 96rpx;
+  padding: 0 44rpx;
+  font-size: 32rpx;
+  border-width: 5rpx;
+}
+
+.ai-input-large:not(.ai-input-no-shadow) {
+  box-shadow: 0 8rpx 0 0 #d4c9b4;
 }
 
 .ai-input-error {
   border-color: var(--ai-danger);
-  box-shadow: 0 8rpx 0 rgba(200, 78, 78, 0.25);
+  box-shadow: 0 6rpx 0 0 #c84e4e;
 }
 
 .ai-input-warning {
-  border-color: #f0ad3d;
-  box-shadow: 0 8rpx 0 rgba(240, 173, 61, 0.25);
+  border-color: #f5c31c;
+  box-shadow: 0 6rpx 0 0 #d99a00;
+}
+
+.ai-input-error:hover,
+.ai-input-error:focus-within {
+  border-color: #ff7a7a;
+  box-shadow: 0 6rpx 0 0 #c84e4e;
+}
+
+.ai-input-warning:hover,
+.ai-input-warning:focus-within {
+  border-color: #ffd34d;
+  box-shadow: 0 6rpx 0 0 #d99a00;
 }
 
 .ai-input-disabled {
-  opacity: 0.55;
+  cursor: not-allowed;
+  opacity: 0.6;
+  background: #ece8dc;
+  border-color: #d4c9b4;
+  box-shadow: none;
 }
 
 .ai-input-no-shadow {
   box-shadow: none;
 }
 
+.ai-input-no-shadow:hover,
+.ai-input-no-shadow:focus-within {
+  box-shadow: none;
+}
+
+.ai-input-error.ai-input-no-shadow {
+  box-shadow: 0 6rpx 0 0 #c84e4e;
+}
+
+.ai-input-warning.ai-input-no-shadow {
+  box-shadow: 0 6rpx 0 0 #d99a00;
+}
+
+.ai-input-error.ai-input-no-shadow:hover,
+.ai-input-error.ai-input-no-shadow:focus-within {
+  box-shadow: 0 6rpx 0 0 #c84e4e;
+}
+
+.ai-input-warning.ai-input-no-shadow:hover,
+.ai-input-warning.ai-input-no-shadow:focus-within {
+  box-shadow: 0 6rpx 0 0 #d99a00;
+}
+
 .ai-input-control {
   flex: 1;
   min-width: 0;
-  color: var(--ai-text);
-  font-size: 28rpx;
+  color: #725d42;
+  font-family: var(--ai-font);
+  font-size: inherit;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+}
+
+.ai-input-control::placeholder,
+.ai-input-control input::placeholder,
+.ai-input-control .weui-input::placeholder {
+  color: #c4b89e;
+  font-weight: 400;
+  opacity: 1;
+}
+
+.ai-input-control::-webkit-input-placeholder,
+.ai-input-control input::-webkit-input-placeholder,
+.ai-input-control .weui-input::-webkit-input-placeholder {
+  color: #c4b89e;
+  font-weight: 400;
+  opacity: 1;
+}
+
+.ai-input-control::-moz-placeholder,
+.ai-input-control input::-moz-placeholder,
+.ai-input-control .weui-input::-moz-placeholder {
+  color: #c4b89e;
+  font-weight: 400;
+  opacity: 1;
+}
+
+.ai-input-placeholder {
+  color: #c4b89e;
+  font-weight: 400;
+}
+
+.ai-input-disabled .ai-input-control {
+  color: #c4b89e;
 }
 
 .ai-input-affix,
 .ai-input-clear {
-  color: var(--ai-muted);
+  color: #a0936e;
+}
+
+.ai-input-affix {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  font-size: 1em;
+}
+
+.ai-input-affix:first-child {
+  margin-right: 12rpx;
+}
+
+.ai-input-affix:last-child {
+  margin-left: 12rpx;
 }
 
 .ai-input-clear {
-  width: 42rpx;
-  height: 42rpx;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40rpx;
+  height: 40rpx;
+  margin-left: 8rpx;
   border-radius: 50%;
   text-align: center;
-  line-height: 42rpx;
-  background: rgba(111, 79, 40, 0.1);
+  line-height: 40rpx;
+  font-size: 26rpx;
+  font-weight: 700;
+  background: transparent;
   transition: transform 0.18s ease, background-color 0.18s ease, color 0.18s ease;
 }
 
 .ai-input-clear:hover,
 .ai-input-clear:active {
-  color: var(--ai-text);
-  background: rgba(111, 79, 40, 0.16);
-  transform: scale(1.08);
+  color: #725d42;
+  background: rgba(114, 93, 66, 0.1);
 }
 
 .ai-modal-mask {

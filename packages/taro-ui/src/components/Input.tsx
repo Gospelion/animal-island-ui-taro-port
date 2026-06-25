@@ -70,6 +70,9 @@ export const Input: React.FC<InputProps> = ({
         disabled={disabled}
         value={currentValue}
         placeholder={placeholder}
+        placeholderClass="ai-input-placeholder"
+        placeholderStyle="color:#c4b89e;font-weight:400;"
+        placeholderTextColor="#c4b89e"
         onInput={(event) => {
           const nextValue = String((event as { detail?: { value?: unknown } }).detail?.value ?? '');
           emitChange(nextValue, event);
@@ -83,7 +86,7 @@ export const Input: React.FC<InputProps> = ({
             onClear?.();
           }}
         >
-          x
+          ×
         </Text>
       ) : null}
       {suffix ? <View className="ai-input-affix">{suffix}</View> : null}

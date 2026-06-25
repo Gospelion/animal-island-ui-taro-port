@@ -226,15 +226,52 @@ function ButtonDemo() {
 }
 
 function InputDemo() {
-  const [name, setName] = useState('Nook');
+  const [inputValue, setInputValue] = useState('');
   return (
     <>
-      <Section title="基础用法" badge="controlled">
-        <View className="demo-col"><Input placeholder="Basic input" /><Input value={name} allowClear shadow placeholder="Your island name" onChange={({ value }) => setName(value)} prefix={<Icon name="icon-map" size="22rpx" />} /><Input placeholder="Warning status" status="warning" /><Input placeholder="Error status" status="error" /><Input placeholder="Disabled" disabled /></View>
-        <Text className="hint">Current value: {name || '-'}</Text>
+      <Section title="shadow 阴影控制">
+        <View className="demo-col input-demo-col">
+          <Input placeholder="No shadow (default)" />
+          <Input placeholder="With shadow" shadow />
+        </View>
       </Section>
-      <Code>{"<Input allowClear value={name} onChange={({ value }) => setName(value)} />"}</Code>
-      <Api rows={[['allowClear', '允许清除', 'boolean'], ['status', '校验状态', 'error | warning'], ['onChange', '值变化回调', '({ value }) => void']]} />
+      <Section title="基础用法">
+        <View className="demo-col input-demo-col">
+          <Input placeholder="Basic input" />
+          <Input
+            placeholder="With clear"
+            allowClear
+            value={inputValue}
+            onChange={({ value }) => setInputValue(value)}
+            onClear={() => setInputValue('')}
+          />
+          <Input
+            placeholder="Prefix & Suffix"
+            prefix={<Icon name="icon-map" size="22rpx" />}
+            suffix={<Text>↵</Text>}
+          />
+        </View>
+      </Section>
+      <Section title="size 尺寸">
+        <View className="demo-col input-demo-col">
+          <Input placeholder="Small" size="small" />
+          <Input placeholder="Middle (default)" size="middle" />
+          <Input placeholder="Large" size="large" />
+        </View>
+      </Section>
+      <Section title="status 校验状态">
+        <View className="demo-col input-demo-col">
+          <Input placeholder="Error status" status="error" />
+          <Input placeholder="Warning status" status="warning" />
+        </View>
+      </Section>
+      <Section title="disabled 禁用">
+        <View className="demo-col input-demo-col">
+          <Input placeholder="Disabled" disabled />
+        </View>
+      </Section>
+      <Code>{"<Input placeholder=\"With clear\" allowClear value={value} onChange={({ value }) => setValue(value)} />"}</Code>
+      <Api rows={[['size', '输入框尺寸', 'small | middle | large'], ['prefix / suffix', '前后缀内容', 'ReactNode'], ['allowClear', '允许清除', 'boolean'], ['status', '校验状态', 'error | warning'], ['shadow', '是否显示阴影', 'boolean']]} />
     </>
   );
 }
@@ -290,7 +327,63 @@ function DividerDemo() {
 }
 
 function IconDemo() {
-  return <><Section title="图标列表" badge="bounce"><View className="icon-grid">{ICON_LIST.map((icon) => <View key={icon.name} className="icon-cell"><Icon name={icon.name} size="70rpx" bounce /><Text>{icon.label}</Text></View>)}</View></Section><Code>{'<Icon name="icon-camera" size="70rpx" bounce />'}</Code><Api rows={[['name', '图标名称', 'IconName'], ['bounce', '弹跳动效', 'boolean']]} /></>;
+  const basicIcons = ICON_LIST.slice(0, 5);
+  const bounceIcons = ICON_LIST.slice(0, 3);
+  const sizePreview = [
+    { label: '24', size: '24rpx' },
+    { label: '36', size: '36rpx' },
+    { label: '48', size: '48rpx' },
+    { label: '64', size: '64rpx' },
+    { label: '88', size: '88rpx' }
+  ];
+
+  return (
+    <>
+      <Section title="基础用法" badge={`${ICON_LIST.length} icons`}>
+        <View className="icon-demo-strip">
+          {basicIcons.map((icon) => (
+            <View key={icon.name} className="icon-demo-sample">
+              <Icon name={icon.name} size="54rpx" />
+            </View>
+          ))}
+        </View>
+      </Section>
+      <Section title="size 尺寸">
+        <View className="icon-size-row">
+          {sizePreview.map(({ label, size }) => (
+            <View key={size} className="icon-size-item">
+              <Icon name="icon-miles" size={size} />
+              <Text>{label}</Text>
+            </View>
+          ))}
+        </View>
+      </Section>
+      <Section title="bounce 弹跳动画（鼠标悬停查看效果）">
+        <View className="icon-demo-strip">
+          {bounceIcons.map((icon) => (
+            <View key={icon.name} className="icon-demo-sample">
+              <Icon name={icon.name} size="58rpx" bounce />
+            </View>
+          ))}
+        </View>
+      </Section>
+      <Section title="图标列表">
+        <View className="icon-list-table">
+          {ICON_LIST.map((icon) => (
+            <View key={icon.name} className="icon-list-row">
+              <View className="icon-list-main">
+                <Icon name={icon.name} size="52rpx" />
+                <Text className="icon-list-label">{icon.label}</Text>
+              </View>
+              <Text className="icon-list-name">{icon.name}</Text>
+            </View>
+          ))}
+        </View>
+      </Section>
+      <Code>{'<Icon name="icon-camera" size="70rpx" bounce />'}</Code>
+      <Api rows={[['name', '图标名称', 'IconName'], ['size', '图标尺寸', 'number | string'], ['bounce', '弹跳动效', 'boolean']]} />
+    </>
+  );
 }
 
 function TitleDemo() {

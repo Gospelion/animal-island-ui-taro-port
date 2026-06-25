@@ -27,7 +27,7 @@
       </view>
 
       <view
-        wx:else
+        wx:if="{{rows.length}}"
         wx:for="{{rows}}"
         wx:for-item="row"
         wx:for-index="rowIndex"

@@ -9,3 +9,5 @@ miniprogram_npm/
 /*.png
 # Read-only upstream reference repo.
 original-repo/
+
+AGENTS.md

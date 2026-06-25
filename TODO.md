@@ -20,7 +20,7 @@
 
 ## 当前状态
 
-已完成 Spike v0、下一批低风险组件迁移、`Collapse`、`CodeBlock` 和 `Table` 首版迁移。当前双线合计 13 个组件可用，Taro 线额外完成 `Typewriter`：
+V1 范围内的组件已经完成迁移，并经过人工检查确认可作为正式版 V1。当前双线合计 13 个组件可用，Taro 线额外完成 `Typewriter`：
 
 - `Button` / `ai-button`
 - `Card` / `ai-card`
@@ -44,9 +44,9 @@
 - Taro 组件包已可类型检查和构建，Taro demo 已可构建 H5 与微信小程序产物。
 - 微信原生组件包已可生成发布形态，demo 已可生成 `node_modules` / `miniprogram_npm` 接入目录。
 - 已建立 Taro asset 复制、微信原生包构建、原生组件结构校验、原生 demo npm 同步等脚本。
-- 已补充中文 `README.md`、`SPIKE_REPORT.md`、`LICENSE.upstream` 和 `THIRD_PARTY_NOTICES.md`。
+- 已补充中文 `README.md`、`SPIKE_REPORT.md`、`LICENSE.upstream`、`THIRD_PARTY_NOTICES.md` 和 `packages/weapp-native/README.md`。
 
-最近一次完整验证日期：2026-06-23。
+最近一次自动验证日期：2026-06-23。
 
 - `npm run typecheck`
 - `npm run build:all`
@@ -56,28 +56,35 @@
 - `npm run build:weapp -w examples-taro-demo`
 - `npm run prepare:weapp-demo`
 
+最近一次人工验收日期：2026-06-25。
+
+- Taro 网页端渲染正常。
+- Taro 小程序侧可正常应用。
+- 微信原生小程序 demo 已在微信开发者工具中检查通过。
+
 已知情况：
 
 - `npm install` 后仍报告 `39 vulnerabilities`，主要来自 Taro / webpack 依赖树；不要直接执行 `npm audit fix --force`。
-- Taro H5 构建仍有入口体积 warning，`app` 约 `298 KiB`，Spike 阶段暂接受。
+- Taro H5 构建仍有入口体积 warning，`app` 约 `298 KiB`，V1 暂接受。
 - 沙箱内 Taro H5 / weapp 构建可能遇到 `spawn EPERM` 或子进程无输出卡住；提升权限重跑后可通过，判断为本地 Taro 构建子进程权限问题。
 - `prepare:weapp-demo` 如遇 `EPERM`，优先关闭微信开发者工具或停止其编译，再重跑。
 
 ## 当前待办
 
-### 组件验收
+### V1 维护
 
-- [ ] 人工预览 Taro H5、Taro weapp 和微信原生 demo 中的 13 个双线已迁移组件，并额外预览 Taro `Typewriter`。
-- [ ] 重点确认 `Switch`、`Checkbox`、`Radio`、`Title`、`Divider`、`Collapse`、`CodeBlock`、`Table`、`Typewriter` 的视觉、交互和事件表现。
-- [ ] 为人工预览补充简要验收记录或截图。
+- [x] 人工预览 Taro H5、Taro weapp 和微信原生 demo 中的 13 个双线已迁移组件，并额外预览 Taro `Typewriter`。
+- [x] 重点确认 `Switch`、`Checkbox`、`Radio`、`Title`、`Divider`、`Collapse`、`CodeBlock`、`Table`、`Typewriter` 的视觉、交互和事件表现。
+- [x] 为人工预览补充简要验收记录或截图。
+- [ ] 后续每次修改 V1 组件后，重新执行自动验证并在必要时更新截图或验收记录。
 
 ### 文档与 API
 
-- [ ] 在 `README.md` 中补充已迁移组件的简要 API 示例。
-- [ ] 记录 Taro / 微信原生事件 payload 差异，优先覆盖 `Switch`、`Checkbox`、`Radio`、`Collapse`、`CodeBlock`、`Table`、`Typewriter`。
-- [ ] 记录 `Table` 原生 v1 边界：`ai-table` 只支持按 `dataIndex` 渲染文本单元格，不支持 Taro `column.render` 函数式单元格。
-- [ ] 记录原生组件 `custom-class` / `custom-style` 的覆盖边界。
-- [ ] 根据人工验收结果更新 `SPIKE_REPORT.md` 或新增迁移记录。
+- [ ] 在 `README.md` 中补充更多已迁移组件的简要 API 示例。
+- [x] 记录 Taro / 微信原生事件 payload 差异，覆盖核心 V1 组件。
+- [x] 记录 `Table` 原生 V1 边界：`ai-table` 只支持按 `dataIndex` 渲染文本单元格，不支持 Taro `column.render` 函数式单元格。
+- [x] 记录原生组件 `custom-class` / `custom-style` 的覆盖边界。
+- [x] 根据人工验收结果更新 `SPIKE_REPORT.md`。
 
 ### 实现债务
 

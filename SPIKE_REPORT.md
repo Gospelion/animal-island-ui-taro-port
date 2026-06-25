@@ -1,68 +1,72 @@
-# Spike v0 Report
+# V1 验收记录
 
-## Status
+## 状态
 
-Implemented scaffold and first-pass components for both lines:
+V1 范围内的组件已经完成迁移，并经过人工检查确认可作为正式版 V1：
 
-- Taro React: `Button`, `Card`, `Icon`, `Input`, `Modal`
-- Native WeChat: `ai-button`, `ai-card`, `ai-icon`, `ai-input`, `ai-modal`
+- Taro React：`Button`、`Card`、`Icon`、`Input`、`Modal`、`Switch`、`Checkbox`、`Radio`、`Title`、`Divider`、`Collapse`、`CodeBlock`、`Table`、`Typewriter`
+- 微信原生：`ai-button`、`ai-card`、`ai-icon`、`ai-input`、`ai-modal`、`ai-switch`、`ai-checkbox`、`ai-radio`、`ai-title`、`ai-divider`、`ai-collapse`、`ai-code-block`、`ai-table`
 
-Automated validation was rerun on 2026-06-23 after restoring dependencies:
+2026-06-25 人工检查结论：
+
+- Taro 在网页端渲染正常。
+- Taro 编译到小程序侧后可正常应用。
+- 微信原生小程序 demo 在微信开发者工具中渲染与交互正常。
+
+## 自动验证记录
+
+2026-06-23 恢复依赖后已重新执行：
 
 - `npm run typecheck`
 - `npm run build:all`
 - `npm run test`
+- `npm run check:weapp-structure`
 - `npm run build:h5 -w examples-taro-demo`
 - `npm run build:weapp -w examples-taro-demo`
 - `npm run prepare:weapp-demo`
 
-The H5 demo build still reports an entrypoint size warning (`app` about `298 KiB`), which is acceptable for Spike v0.
+H5 demo 构建仍会报告入口体积 warning，`app` 约 `298 KiB`，V1 暂接受。
 
-## Decisions
+## 架构决策
 
-- Taro and native WeChat are parallel outputs, not a Taro reverse-compilation chain.
-- Visual consistency is prioritized over identical API names.
-- `Modal` does not use React Portal. Both lines render it in the normal component tree.
-- `Input` does not simulate DOM `Event`. Each line emits platform-shaped change payloads.
-- `Icon` uses a lightweight colored tile implementation for built-ins in Spike v0. Final asset strategy remains open.
-- Native `custom-class` / `custom-style` are outer override hooks only. Internal component classes are not stable extension APIs in Spike v0.
-- Spike v0 now includes lightweight CSS/WXSS motion parity for the five migrated components. It does not port Web-only GSAP/MotionPath effects.
+- Taro 与微信原生是并行产物，不以 Taro 反向编译作为原生组件库的基础。
+- 视觉一致优先于 API 名称完全一致。
+- `Modal` 不使用 React Portal，两条产物线都渲染在普通组件树中。
+- `Input` 不模拟 DOM `Event`，两条产物线分别输出符合平台习惯的事件 payload。
+- 原生 `custom-class` / `custom-style` 只作为外层覆盖入口，内部组件类名不作为稳定扩展 API。
+- 小程序端只迁移轻量 CSS / WXSS 动效，不承诺复刻 Web-only GSAP / MotionPath 效果。
 
-## API Differences
+## API 差异
 
-- Taro uses `children`, `onClick`, `className`, `style`.
-- Native WeChat uses `slot`, `bind:tap`, `custom-class`, `custom-style`.
-- Native `ai-modal` includes `showFooter` as a practical Mini Program escape hatch because WXML slots do not provide a reliable React-like `footer === undefined` fallback model.
-- Taro `Input` emits `{ value, event }` through `onChange`; native `ai-input` emits `event.detail.value` through `bind:change`.
-- Taro `Modal` can replace the footer by passing `footer`; native `ai-modal` appends `slot="footer"` before the default buttons and uses `show-footer="{{false}}"` to hide the footer.
+- Taro 使用 `children`、`onClick`、`className`、`style`。
+- 微信原生使用 `slot`、`bind:tap`、`custom-class`、`custom-style`。
+- 微信原生 `ai-modal` 提供 `show-footer`，用于显式控制 footer 是否显示。
+- Taro `Input` 的 `onChange` 输出 `{ value, event }`；原生 `ai-input` 的业务值位于 `event.detail.value`。
+- Taro `Table` 支持 `column.render`；原生 `ai-table` V1 只支持按 `dataIndex` 渲染文本单元格。
+- Taro `Typewriter` 保持上游语义，不输出额外包裹节点；V1 暂无微信原生版本。
 
-## Visual Acceptance Record
+## 视觉验收记录
 
-Source-level demo coverage exists for the 5 Spike v0 components in both demos:
+V1 demo 已覆盖所有已迁移组件：
 
-- Button: primary, dashed, loading spinner, moving loading stripes, and press motion.
-- Card: colored card, dashed card variants, and lift/press motion.
-- Icon: three built-in icon names with explicit size and original-style scale/rotate bounce on hover/press.
-- Input: controlled value, placeholder, prefix icon, clear action, value display, clear press motion, and status transition.
-- Modal: mask fade-in, panel zoom-in, title, default footer buttons, close/ok behavior.
+- `Button`：主要按钮、虚线按钮、loading 状态、按压动效。
+- `Card`：彩色卡片、虚线卡片、卡片层级与按压反馈。
+- `Icon`：内置图标名、尺寸控制、缩放 / 旋转反馈。
+- `Input`：受控值、placeholder、前缀图标、清除动作、状态展示。
+- `Modal`：遮罩、弹层、标题、默认按钮、关闭 / 确认行为。
+- `Switch`、`Checkbox`、`Radio`：受控 / 非受控展示与变化事件。
+- `Title`、`Divider`：多变体视觉展示。
+- `Collapse`：展开 / 收起状态与内容布局。
+- `CodeBlock`：代码展示与内置高亮。
+- `Table`：表头、行、空态、loading、滚动与点击事件。
+- `Typewriter`：Taro 线文本截断、播放与完成回调。
 
-Automated builds confirm the Taro H5 and Taro weapp demo outputs compile. Native WeChat visual acceptance was manually checked in WeChat DevTools on 2026-06-23 after preparing `examples/weapp-demo/miniprogram_npm`; no issue was found for component resolution, visual consistency, loading/disabled states, modal stacking, scroll bleed, or safe-area behavior.
+微信原生小程序侧截图已提交到 `docs/images/weapp-v1-preview.png`，并在根 `README.md` 中展示。
 
-## Deferred Risks
+## V1 外的后续风险
 
-- `Select`: requires a separate spike for `picker` versus custom overlay.
-- `Loading`: should be redesigned as a Mini Program-specific lightweight animation.
-- Full visual parity would still benefit from committed screenshots for future regression comparison.
-- `Icon` asset strategy remains intentionally unresolved. Spike v0 validates API shape and visual tone with colored tiles; later work should decide whether to migrate upstream assets or define a new Mini Program asset pipeline.
-
-## Next Batch Recommendation
-
-If Spike v0 validates in both demos, the next migration batch should be:
-
-- `Switch`
-- `Checkbox`
-- `Radio`
-- `Title`
-- `Divider`
-
-`Table` has since been migrated with a `ScrollView + View` grid strategy for both Taro and native WeChat. Keep `Select`, `Loading`, and `Tooltip` outside the next batch until their platform-specific decisions are settled.
+- `Select`：需要单独比较原生 `picker` 与自绘弹层方案。
+- `Loading`：后续应定义为小程序专用轻动画组件，不直接复刻 Web 版 GSAP / MotionPath。
+- `Tooltip`：需要单独评估触发方式、层级和定位模型。
+- `Form`：字段注册、校验展示和滚动定位需要单独拆解。
+- `Icon`：后续仍可评估是否迁移上游资源或建立新的小程序资源方案。

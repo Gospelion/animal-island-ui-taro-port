@@ -155,9 +155,9 @@ npm run build:demo
 
 ## 版权与许可
 
-本项目基于上游 MIT 许可项目 `guokaigdg/animal-island-ui` 进行移植验证。
+本项目基于上游 `guokaigdg/animal-island-ui` 进行移植验证，并跟随上游改用 Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)。
 
-- 来自上游项目的代码、设计描述及派生修改，保留上游 MIT License 与版权声明。详见 [LICENSE.upstream](./LICENSE.upstream) 与 [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md)。
-- 本仓库新增的独立代码默认使用 [LICENSE](./LICENSE) 中声明的 MIT License，除非具体文件另有说明。
-- 本项目尊重原作者关于学习、研究、非商业展示用途的意愿，不鼓励也不允许将本移植项目用于商业用途。
+- 本仓库整体使用 [LICENSE](./LICENSE) 中声明的 CC BY-NC 4.0；商业用途禁止。
+- 来自上游项目的代码、设计描述及派生修改，保留上游版权声明与 CC BY-NC 4.0 许可声明。详见 [LICENSE.upstream](./LICENSE.upstream) 与 [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md)。
+- 允许的非商业用途包括个人学习、研究、评估、测试和非商业展示；分发或展示时必须保留原作者归属、版权声明和许可声明。
 - 本项目不是任天堂官方产品，与 Nintendo Co., Ltd. 无任何关联、授权或合作关系。

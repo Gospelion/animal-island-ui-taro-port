@@ -108,7 +108,7 @@
 
 - [ ] 确认 `README.md` 保留原作者意愿与非商业声明。
 - [ ] 确认 `LICENSE`、`LICENSE.upstream`、`THIRD_PARTY_NOTICES.md` 表达一致。
-- [ ] 不要把上游 MIT 授权代码错误改写成单一非商业 License。
+- [ ] 不要把上游 CC BY-NC 4.0 授权代码错误标记为 MIT 或其他商业友好 License。
 - [ ] 若未来发布 npm，重新确认包名、license 字段和 README 免责声明。
 - [ ] 发布前重新执行完整验证：
   - [ ] `npm run typecheck`

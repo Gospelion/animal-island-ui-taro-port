@@ -4,11 +4,11 @@
 
 - Source: <https://github.com/guokaigdg/animal-island-ui>
 - Author: guokaigdg
-- License: MIT
+- License: Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)
 - Local reference copy: `original-repo/animal-island-ui-main`
 
 This repository is a porting spike inspired by and partially derived from the upstream React Web component library.
 
-The upstream README states that the project is for personal learning, research, and non-commercial demonstration, and that it does not directly use official Nintendo art materials, code, or resource files.
+The upstream project prohibits commercial use. Permitted non-commercial uses include personal learning, research, evaluation, testing, and non-commercial display. Attribution is required.
 
-This repository preserves the upstream MIT license notice and does not claim any association, authorization, or cooperation with Nintendo Co., Ltd.
+This repository preserves the upstream copyright and CC BY-NC 4.0 license declaration and does not claim any association, authorization, or cooperation with Nintendo Co., Ltd.

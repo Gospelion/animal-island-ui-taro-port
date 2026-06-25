@@ -3,7 +3,7 @@
   "version": "0.0.0-spike.0",
   "private": true,
   "description": "Spike v0 for porting animal-island-ui to Taro and native WeChat Mini Program components.",
-  "license": "SEE LICENSE IN LICENSE",
+  "license": "CC-BY-NC-4.0",
   "workspaces": [
     "packages/*",
     "examples/*"
